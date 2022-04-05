@@ -23,11 +23,11 @@
 <meta property="article:modified_time" content="2022-04-05T08:21:21.989Z">
 <meta property="article:author" content="Ykuri98">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649153013083">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649153403333">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649153013083">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649153013083">
-    <link rel="stylesheet" href="/css/style.css?v=1649153013083">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649153403333">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649153403333">
+    <link rel="stylesheet" href="/css/style.css?v=1649153403333">
      
     
 <meta name="generator" content="Hexo 5.4.1"></head>
@@ -228,19 +228,19 @@
   
       <div class="nexmoe-post-footer">
           <section class="nexmoe-comment">
-    <div id="gitment"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-    owner: 'Ykuri98', // 你的 GitHub ID
-    repo: 'issue_repository', // 存储评论的 repo
-    oauth: {
-        client_id: 'ff024b5293a92e4461fd', // 你的 client ID
-        client_secret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c' // 你的 client secret
-    },
-})
-gitment.render('gitment')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
 </script>
 </section>
       </div>
@@ -289,7 +289,7 @@ gitment.render('gitment')
 
  
 
-<script async src="/js/app.js?v=1649153013096"></script>
+<script async src="/js/app.js?v=1649153403350"></script>
 
 
 
