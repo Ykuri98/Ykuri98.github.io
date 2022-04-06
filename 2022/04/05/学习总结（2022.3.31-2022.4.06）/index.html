@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+    <title>学习总结（2022.3.31-2022.4.06） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="继承的限制 子类不可以继承父类的私有成员，因为没有访问权限。 子类不可以继承父类的构造器，因为构造器不能算成员。 子类可以访问父类的静态方法，但是并不是继承。  继承中的属性隐藏和方法覆盖对于成员变量的访问范围和访问结果都看引用类型。引用是父类则访问的是父类成员变量，子类则访问子类成员变量。 对于成员方法的访问范围如上相同，看引用类型。 对于成员方法的访问结果则看对象类型。对象是子类则可以调用子类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.3.31-2022.4.06）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="继承的限制 子类不可以继承父类的私有成员，因为没有访问权限。 子类不可以继承父类的构造器，因为构造器不能算成员。 子类可以访问父类的静态方法，但是并不是继承。  继承中的属性隐藏和方法覆盖对于成员变量的访问范围和访问结果都看引用类型。引用是父类则访问的是父类成员变量，子类则访问子类成员变量。 对于成员方法的访问范围如上相同，看引用类型。 对于成员方法的访问结果则看对象类型。对象是子类则可以调用子类">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-06T13:39:25.712Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649252432658">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649252432658">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649252432658">
+    <link rel="stylesheet" href="/css/style.css?v=1649252432658">
+     
+    
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>4</div>
+        <div><span>Tags</span>3</div>
+        <div><span>Categories</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/05/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">Github+hexo搭建博客遇到的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/">学习总结（2022.3.21-2022.3.30）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/">学习总结（2022.3.31-2022.4.06）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="学习总结（2022.3.31-2022.4.06）" class="lazyload">
+              <h1>学习总结（2022.3.31-2022.4.06）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月05日</a>
+</div>
+
+      
+
+      <h2 id="继承的限制"><a href="#继承的限制" class="headerlink" title="继承的限制"></a>继承的限制</h2><ol>
+<li>子类不可以继承父类的私有成员，因为没有访问权限。</li>
+<li>子类不可以继承父类的构造器，因为构造器不能算成员。</li>
+<li>子类可以访问父类的静态方法，但是并不是继承。</li>
+</ol>
+<h2 id="继承中的属性隐藏和方法覆盖"><a href="#继承中的属性隐藏和方法覆盖" class="headerlink" title="继承中的属性隐藏和方法覆盖"></a>继承中的属性隐藏和方法覆盖</h2><p>对于成员变量的访问范围和访问结果都看引用类型。引用是父类则访问的是父类成员变量，子类则访问子类成员变量。</p>
+<p>对于成员方法的访问范围如上相同，看引用类型。</p>
+<p>对于成员方法的访问结果则看对象类型。对象是子类则可以调用子类方法、重写或没重写的父类方法，父类则只能调用父类方法。</p>
+<h2 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h2><p>final修饰类表示类不可被继承。</p>
+<p>final修饰方法表示方法不可被重写，但可以被继承。</p>
+<p>final修饰变量表示常量。与static一起用表示全局变量。</p>
+<h2 id="instanceof关键字"><a href="#instanceof关键字" class="headerlink" title="instanceof关键字"></a>instanceof关键字</h2><p>用来判断一个类是否是某个类的子类，一般用于保证向下转型的安全。</p>
+<h2 id="抽象类（abstract）"><a href="#抽象类（abstract）" class="headerlink" title="抽象类（abstract）"></a>抽象类（abstract）</h2><p>抽象类与普通类相同，但是多了一个抽象方法，即不需要实现该方法，而是让子类通过重写的方式来实现。抽象类和抽象类之间可以有继承关系，且继承的抽象类可以选择重写被继承抽象类的抽象方法。</p>
+<h2 id="接口（interface）"><a href="#接口（interface）" class="headerlink" title="接口（interface）"></a>接口（interface）</h2><p>接口是一种开发标准，表示对功能的扩展，只关注行为而不关注属性。一般用来抽象共性行为，与实现其的类为like-a关系。</p>
+<p>接口不能创建对象，自然也没有构造器。</p>
+<p>接口一般没有成员，只有抽象方法。</p>
+<p>接口可以继承接口，但是接口和类之间不能发生继承，类只能实现(implement)接口。</p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><ol>
+<li>成员内部类：与普通类相同，但是没有静态声明（允许有静态全局常量）；可以发生继承和实现；与外围类有强依赖关系，可以无视访问权限互相访问。</li>
+<li>静态内部类：与普通类完全相同；可以发生继承和实现；与外围类为互相独立的关系，虽然访问不受访问权限限制，但是需要创建对象才可以访问。</li>
+<li>局部内部类：不具有访问修饰权限；不具有静态声明；可以发生继承和实现；虽然可以访问外部类的成员，但是外部类无法访问局部内部类的成员。</li>
+</ol>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>Lambda表达式是一种特殊的局部匿名内部类。必须在一个实现了功能接口（有且只有一个必须实现的抽象方法的接口）的类中定义。得到的是这个接口的子类对象。基本格式为：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-function"><span class="hljs-params">(形参列表)</span> -&gt;</span> &#123;<br><span class="hljs-regexp">// 方法体</span><br><span class="hljs-regexp">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>()中是抽象方法的形参列表。</p>
+<p>{}中是抽象方法的实现。</p>
+<p>在写完Lambda表达式后，需要在表达式前面用<code>(对象名)</code>帮编译器明确对象类型。</p>
+<p>Lambda表达式可以简化：当形参只有一个时，可以省略()；当方法体只有一条语句时（包括return语句），可以省略{}。</p>
+<p>Lambda表达式的应用：将一个String对象数组映射为所有字符串长度的数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> yzw</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@since</span> 2022/04/02</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeworkImpl</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        String[] s = &#123;<span class="hljs-string">&quot;aaa&quot;</span>,<span class="hljs-string">&quot;bb&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>&#125;;<span class="hljs-comment">// 实验数组</span><br>        <span class="hljs-type">int</span>[] sLength = mappingObjectLength(s,o -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[s.length]);<span class="hljs-comment">// mapping返回int数组</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : sLength)&#123;<br>            System.out.println(i);<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] mappingObjectLength(Object[] obj, Map map)&#123;<br>        <span class="hljs-type">int</span>[] result = map.mapping(obj);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; obj.length; i++) &#123;<br>            result[i] = obj[i].toString().length();<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Map</span>&#123;<br>    <span class="hljs-type">int</span>[] mapping(Object o); <span class="hljs-comment">//返回一个int数组表示每个元素的长度  </span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Object-toString"><a href="#Object-toString" class="headerlink" title="Object.toString()"></a><code>Object.toString()</code></h2><p><code>toString()</code>直接使用是打印对象的<code>全限定类名 +  @  +  对象的十六进制地址值</code>。</p>
+<p>可以通过重写来展示对象的状态。</p>
+<h2 id="Object-equals-和Object-hashcode"><a href="#Object-equals-和Object-hashcode" class="headerlink" title="Object.equals()和Object.hashcode()"></a><code>Object.equals()</code>和<code>Object.hashcode()</code></h2><p><code>equals()</code>直接使用是比较两个引用是否指向相同对象，可以通过重写来修改判断的条件（比如从比较对象的地址修改为比较对象的状态）。</p>
+<p>重写遵从闭包原则，即</p>
+<ol>
+<li><p>自反性。<code>x.equals(x) == true</code></p>
+</li>
+<li><p>排他性。当比对的不是同种类型的对象或者是一个null时，默认返回false。</p>
+</li>
+<li><p>对称性。<code>x.equals(y) == true</code> -&gt; <code>y.equals(x) == true</code>。</p>
+</li>
+<li><p>传递性。<code>x.equals(y) == true &amp;&amp; y.equals(z) == true</code> -&gt; <code>x.equals(z) == true</code>。</p>
+</li>
+</ol>
+<p>其中自反性和排它性需要写代码做判断，而对称性，一致性，传递性，只需要用成员变量的取值来判断对象相等，就自动满足它们。</p>
+<p>排他性的选择：<code>getClass()</code>（只能是相同的对象），<code>instanceof</code>（可以是对象的子类）</p>
+<p>如果重写<code>equals()</code>，<code>hashcode()</code>也需要重写。因为逻辑上相等的两个对象必须有相同的hash值。</p>
+<h2 id="Object-clone"><a href="#Object-clone" class="headerlink" title="Object.clone()"></a><code>Object.clone()</code></h2><p>作用是获得一个独立的，与原对象成员一致的新对象。但是在默认的情况下，只能在子类内克隆自己，所以一般需要在类中重写该方法。其次，一个类想实现克隆，需要实现一个标记接口（不含任何抽象方法的接口）<code>java.lang.Cloneable</code>。</p>
+<p>浅克隆：如果克隆的类中有引用类型变量，在克隆后该变量会与克隆前的类中的变量指向同一个对象，这样并不能说明这两个类是独立的，这叫做浅克隆。</p>
+<p>深度克隆：在<code>clone()</code>中做出如下操作：</p>
+<ol>
+<li>将引用指向的对象，也克隆一份。</li>
+<li>然后让克隆后的引用指向它。</li>
+</ol>
+<p>可以让克隆后的引用类型变量指向一个同样被克隆的新的对象，这样就实现了深度克隆。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>&#123;<br>    Dog d;<br>    <br>    <span class="hljs-comment">//重写clone方法的访问权限</span><br> 	<span class="hljs-meta">@Override</span><br> 	<span class="hljs-keyword">protected</span> Student <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>    <span class="hljs-comment">//仍然选择调用父类默认实现</span><br>    <span class="hljs-comment">//深度克隆的步骤</span><br>    <span class="hljs-comment">//1.深度克隆是在浅克隆基础上玩的</span><br>    <span class="hljs-type">Student</span> <span class="hljs-variable">cloneStu</span> <span class="hljs-operator">=</span> (Student) <span class="hljs-built_in">super</span>.clone();<br>    <span class="hljs-comment">//2.需要把Dog对象克隆一份</span><br>    <span class="hljs-type">Dog</span> <span class="hljs-variable">cloneDog</span> <span class="hljs-operator">=</span> cloneStu.d.clone();<br>    <span class="hljs-comment">//3.将拷贝引用指向拷贝对象</span><br>    cloneStu.d = cloneDog;<br>    <span class="hljs-keyword">return</span> cloneStu;<br>    <span class="hljs-comment">//return ((Student) super.clone());</span><br> 	&#125;<br>&#125; <br></code></pre></td></tr></table></figure>
+
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>Ykuri98<br>
+        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;05&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;05&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/java/" rel="tag">java</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">继承的限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E9%9A%90%E8%97%8F%E5%92%8C%E6%96%B9%E6%B3%95%E8%A6%86%E7%9B%96"><span class="toc-number">2.</span> <span class="toc-text">继承中的属性隐藏和方法覆盖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">final关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">4.</span> <span class="toc-text">instanceof关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%88abstract%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">抽象类（abstract）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%EF%BC%88interface%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">接口（interface）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-number">7.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">8.</span> <span class="toc-text">Lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-toString"><span class="toc-number">9.</span> <span class="toc-text">Object.toString()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-equals-%E5%92%8CObject-hashcode"><span class="toc-number">10.</span> <span class="toc-text">Object.equals()和Object.hashcode()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-clone"><span class="toc-number">11.</span> <span class="toc-text">Object.clone()</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1649252432668"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
