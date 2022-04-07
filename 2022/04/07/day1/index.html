@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+    <title>剑指offer-day1 - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="用两个栈实现队列简单且经典的题目，用两个栈来模拟一个队列。 设置两个栈s1和s2，s1用于正常模拟队列的进队。当队列需要出队时，要把是s1中的值依次放入s2，再在s2的栈顶删除s1的栈底元素（也就是队列的队头元素），然后将处理后的元素再依次放入s1中，就模拟了队列的出队过程。 此时需注意：删除元素应该有判空条件。 123456789101112131415161718192021222324252">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-day1">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/07/day1/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="用两个栈实现队列简单且经典的题目，用两个栈来模拟一个队列。 设置两个栈s1和s2，s1用于正常模拟队列的进队。当队列需要出队时，要把是s1中的值依次放入s2，再在s2的栈顶删除s1的栈底元素（也就是队列的队头元素），然后将处理后的元素再依次放入s1中，就模拟了队列的出队过程。 此时需注意：删除元素应该有判空条件。 123456789101112131415161718192021222324252">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-07T11:29:40.000Z">
+<meta property="article:modified_time" content="2022-04-07T12:36:49.068Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649335022557">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649335022557">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649335022557">
+    <link rel="stylesheet" href="/css/style.css?v=1649335022557">
+     
+    
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/07/day1/">剑指offer-day1</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/">学习总结（2022.3.31-2022.4.06）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/">学习总结（2022.3.21-2022.3.30）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">Github+hexo搭建博客遇到的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="剑指offer-day1" class="lazyload">
+              <h1>剑指offer-day1</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月07日</a>
+</div>
+
+      
+
+      <h2 id="用两个栈实现队列"><a href="#用两个栈实现队列" class="headerlink" title="用两个栈实现队列"></a>用两个栈实现队列</h2><p>简单且经典的题目，用两个栈来模拟一个队列。</p>
+<p>设置两个栈s1和s2，s1用于正常模拟队列的进队。当队列需要出队时，要把是s1中的值依次放入s2，再在s2的栈顶删除s1的栈底元素（也就是队列的队头元素），然后将处理后的元素再依次放入s1中，就模拟了队列的出队过程。</p>
+<p>此时需注意：删除元素应该有判空条件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CQueue</span> &#123;<br>    Stack&lt;Integer&gt; s1;<span class="hljs-comment">// 新建两个栈</span><br>    Stack&lt;Integer&gt; s2;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">CQueue</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// 初始化</span><br>        s1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        s2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">appendTail</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<span class="hljs-comment">// 模拟进队</span><br>        s1.push(value);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">deleteHead</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// 模拟出队</span><br>        <span class="hljs-keyword">if</span>(s1.empty())&#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(!s1.empty())&#123;<br>            s2.push(s1.pop());<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> s2.pop();<span class="hljs-comment">// 需要出队的元素</span><br>        <span class="hljs-keyword">while</span>(!s2.empty())&#123;<br>            s1.push(s2.pop());<br>        <br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>看评论说java的stack类会造成速度变慢，可以用LinkedList做容器，但是会不符合题目要求，可以作为优化的一种选项。</p>
+<h2 id="包含min函数的栈"><a href="#包含min函数的栈" class="headerlink" title="包含min函数的栈"></a>包含min函数的栈</h2><p>原本是简单题，但是因为自己想的太复杂了，迟迟没有做出来，参考了一下答案，才把思路理清（👎）</p>
+<p>设置一个辅助栈supStack，用于记录主栈入栈操作时栈内的最小值。第一个入主栈的自然要记录，此后若有小于或等于辅助栈栈顶的数，则需要辅助栈将一个相同的数放入栈顶，反之则不用操作。出栈时则需要与辅助栈的栈顶比对，若相等则辅助栈也必须出栈。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MinStack</span> &#123;<br>    Stack&lt;Integer&gt; mainStack;<span class="hljs-comment">// 主栈</span><br>    Stack&lt;Integer&gt; supStack;<span class="hljs-comment">// 辅助栈</span><br>    <span class="hljs-comment">/** initialize your data structure here. */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MinStack</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// 初始化</span><br>        mainStack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>();<br>        supStack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        mainStack.push(x);<br>        <span class="hljs-keyword">if</span>(supStack.empty() || supStack.peek() &gt;= x)&#123;<span class="hljs-comment">// 辅助栈空或大于等于要放入的值时，需放入一个同样的值</span><br>            supStack.push(x);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span>(mainStack.pop().equals(supStack.peek()))&#123;<span class="hljs-comment">// 当出栈值与辅助栈栈顶相等时，辅助栈也要出栈</span><br>            supStack.pop();<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">top</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// 查看主栈的栈顶</span><br>        <span class="hljs-keyword">return</span> mainStack.peek();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">min</span><span class="hljs-params">()</span> &#123;<span class="hljs-comment">// 查看辅助栈的栈顶</span><br>        <span class="hljs-keyword">return</span> supStack.peek();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>需要注意的是，pop()中需要使用<code>equals</code>方法而不是<code>==</code>，因为在<code>Integer</code>中，[-128,127]会被缓存记住，只有在这个范围内<code>==</code>才是比较数值，否则比较的是对象，会造成错误。</p>
+<h2 id="记忆点"><a href="#记忆点" class="headerlink" title="记忆点"></a>记忆点</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Java Stack类</span><br><br><span class="hljs-type">boolean</span> <span class="hljs-title function_">empty</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 判断栈是否为空</span><br>Object <span class="hljs-title function_">peek</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 返回栈顶</span><br>Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 返回并删除栈顶</span><br>Object <span class="hljs-title function_">push</span><span class="hljs-params">(Object element)</span>;<span class="hljs-comment">// 在栈顶添加新元素</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 查找s内的值，返回其在栈内的位置，以1为基数</span><br></code></pre></td></tr></table></figure>
+
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>Ykuri98<br>
+        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/07/day1/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;07&#x2F;day1&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;07&#x2F;day1&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">用两个栈实现队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E5%90%ABmin%E5%87%BD%E6%95%B0%E7%9A%84%E6%A0%88"><span class="toc-number">2.</span> <span class="toc-text">包含min函数的栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B0%E5%BF%86%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">记忆点</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1649335022563"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
