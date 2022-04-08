@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+    <title>剑指offer-day2 - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="从尾到头打印链表简单题，但是实现方法与答案有些不同。 我考虑的是用一个ArrayList来记录链表中的值，最后逆序赋值给一个int数组。答案用的是模拟栈的LinkedList。我尝试了两个方法，发现时空复杂度并没有什么变化，所以就放上自己的答案吧。 12345678910111213141516171819202122&#x2F;** * Definition for singly-linked list.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-day2">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/08/%E5%89%91%E6%8C%87offer-day2/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="从尾到头打印链表简单题，但是实现方法与答案有些不同。 我考虑的是用一个ArrayList来记录链表中的值，最后逆序赋值给一个int数组。答案用的是模拟栈的LinkedList。我尝试了两个方法，发现时空复杂度并没有什么变化，所以就放上自己的答案吧。 12345678910111213141516171819202122&#x2F;** * Definition for singly-linked list.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-08T12:58:04.000Z">
+<meta property="article:modified_time" content="2022-04-08T15:04:23.662Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649430281770">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649430281770">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649430281770">
+    <link rel="stylesheet" href="/css/style.css?v=1649430281770">
+     
+    
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>6</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/08/%E5%89%91%E6%8C%87offer-day2/">剑指offer-day2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/07/%E5%89%91%E6%8C%87offer-day1/">剑指offer-day1</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/">学习总结（2022.3.31-2022.4.06）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/">学习总结（2022.3.21-2022.3.30）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">Github+hexo搭建博客遇到的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="剑指offer-day2" class="lazyload">
+              <h1>剑指offer-day2</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月08日</a>
+</div>
+
+      
+
+      <h2 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h2><p>简单题，但是实现方法与答案有些不同。</p>
+<p>我考虑的是用一个ArrayList来记录链表中的值，最后逆序赋值给一个int数组。答案用的是模拟栈的LinkedList。我尝试了两个方法，发现时空复杂度并没有什么变化，所以就放上自己的答案吧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] reversePrint(ListNode head) &#123;<br>        ArrayList&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">while</span>(head != <span class="hljs-literal">null</span>)&#123;<br>            list.add(head.val);<br>            head = head.next;<br>        &#125;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[list.size()];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; list.size(); i++)&#123;<br>            res[i] = list.get(list.size() - i - <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h2><p>经典题目了，但是发现自己死活做不出来，总是有空指针异常，一看答案发现语句顺序错了…但总体思路是对的。利用三个指针来指向前元素、现元素和后元素，然后进行反转操作，操作顺序为：</p>
+<ol>
+<li>next指针指向当前元素的后一个元素</li>
+<li>cur指向的当前元素的指针改为指向pre</li>
+<li>pre改为指向cur指向的元素</li>
+<li>cur改为指向next指向的元素</li>
+</ol>
+<p>唯一要注意的点是next指针需要在循环内创建，否则在链表本身为空时会报空指针。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">reverseList</span><span class="hljs-params">(ListNode head)</span>&#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br><br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-type">ListNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur.next;<span class="hljs-comment">// next指针指向后元素</span><br>            cur.next = pre;<span class="hljs-comment">// cur的指针改为指向pre</span><br>            pre = cur;<span class="hljs-comment">// pre改为指向cur指向的元素</span><br>            cur = next;<span class="hljs-comment">// cur改为指向next指向的元素</span><br>            <span class="hljs-comment">//next = cur.next;// 自己写的报空指针，不能写在后面，因为当cur在尾指针null时，无法获取next</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> pre;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>之前有想过同上一题目一样，用一个辅助栈来完成反转，看了答案发现这样做并没有三指针快，就放弃这个思路了。</p>
+<h2 id="复杂链表的复制"><a href="#复杂链表的复制" class="headerlink" title="复杂链表的复制"></a>复杂链表的复制</h2><p>完全不会做，选择睡大觉（恼）</p>
+<p>好好看了看答案，大概知道思路是怎样的，复述一下。</p>
+<p>有两种解法：辅助哈希表和拼接链表，因为后者在空间复杂度上优于前者，所以使用后者。</p>
+<p>因为random节点的存在，导致复制时指针可能指向一个还没有创建的节点，所以可以将原链表两倍拉长，使原链表节点先指向复制节点，复制节点再指向原链表的下一个节点。完成复制后进行random节点的指向初始化，通过原节点的信息来让复制节点的指向正确的节点。最后将链表拆开，复制完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">// Definition for a Node.</span><br><span class="hljs-comment">class Node &#123;</span><br><span class="hljs-comment">    int val;</span><br><span class="hljs-comment">    Node next;</span><br><span class="hljs-comment">    Node random;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    public Node(int val) &#123;</span><br><span class="hljs-comment">        this.val = val;</span><br><span class="hljs-comment">        this.next = null;</span><br><span class="hljs-comment">        this.random = null;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">copyRandomList</span><span class="hljs-params">(Node head)</span> &#123;<br>        <span class="hljs-keyword">if</span>(head == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<span class="hljs-comment">// 空链表返回空</span><br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-comment">// 1. 复制各节点，并构建拼接链表</span><br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(cur.val);<span class="hljs-comment">// 新建复制节点，复制原节点的值</span><br>            tmp.next = cur.next;<span class="hljs-comment">// 复制节点的指针指向原节点的下一个元素</span><br>            cur.next = tmp;<span class="hljs-comment">// 原节点的指针指向复制节点</span><br>            cur = tmp.next;<span class="hljs-comment">// cur改为指向复制节点的下一节点，即原链表的下一节点</span><br>        &#125;<br>        <span class="hljs-comment">// 2. 构建各新节点的 random 指向</span><br>        cur = head;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span>(cur.random != <span class="hljs-literal">null</span>)<br>                cur.next.random = cur.random.next;<span class="hljs-comment">// cur.next是复制节点，说明将复制节点的random指针指向原节点的random指针指向的节点的下一个节点，即也是复制节点</span><br>            cur = cur.next.next;<span class="hljs-comment">// 跳到原链表的下一个节点</span><br>        &#125;<br>        <span class="hljs-comment">// 3. 拆分两链表</span><br>        cur = head.next;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> head, res = head.next;<br>        <span class="hljs-keyword">while</span>(cur.next != <span class="hljs-literal">null</span>) &#123;<br>            pre.next = pre.next.next;<span class="hljs-comment">// 原节点的指针指向原链表的下一个节点</span><br>            cur.next = cur.next.next;<span class="hljs-comment">// 复制节点的指针指向复制链表的下一个节点</span><br>            pre = pre.next;<span class="hljs-comment">// 跳到原链表的下一个节点</span><br>            cur = cur.next;<span class="hljs-comment">// 跳到复制链表的下一个节点</span><br>        &#125;<br>        pre.next = <span class="hljs-literal">null</span>; <span class="hljs-comment">// 单独处理原链表尾节点</span><br>        <span class="hljs-keyword">return</span> res;      <span class="hljs-comment">// 返回新链表头节点</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 作者：jyd</span><br><span class="hljs-comment">// 链接：https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/solution/jian-zhi-offer-35-fu-za-lian-biao-de-fu-zhi-ha-xi-/</span><br><span class="hljs-comment">// 来源：力扣（LeetCode）</span><br><span class="hljs-comment">// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></code></pre></td></tr></table></figure>
+
+<p>可以发现自己对链表还不够熟练，这道题要多加练习。</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>Ykuri98<br>
+        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/08/%E5%89%91%E6%8C%87offer-day2/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;08&#x2F;%E5%89%91%E6%8C%87offer-day2&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;08&#x2F;%E5%89%91%E6%8C%87offer-day2&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">从尾到头打印链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">复杂链表的复制</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1649430281787"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
