@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>Github+hexo搭建博客遇到的坑 - Ykuri的小角落</title>
+    <title>剑指offer-day3 - Ykuri的小角落</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,24 +12,23 @@
     
 
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
-    <meta name="description" content="hexo部署问题按照教程部署完后发现页面仍旧没法更改，折腾大半天后发现github最近将默认分支的名字从master改成了main，而_config.yml中一般都将branch设置为master，导致master成为了副分支，github pages默认应用主分支main，所以没法更改页面（所以说政治正确真是害死人…大家约定俗成的事说改就改） 部署慢问题还没有发现问题所在，大概只能理解成访问gi">
+    <meta name="description" content="替换空格一看到这道题我就优雅地敲下代码 12345class Solution &amp;#123;    public String replaceSpace(String s) &amp;#123;		return s.replace(&quot; &quot;,&quot;%20&quot;);    &amp;#125;&amp;#125;  …咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。 但其实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github+hexo搭建博客遇到的坑">
-<meta property="og:url" content="https://ykuri98.github.io/2022/04/05/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/index.html">
+<meta property="og:title" content="剑指offer-day3">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/09/%E5%89%91%E6%8C%87offer-day3/index.html">
 <meta property="og:site_name" content="Ykuri的小角落">
-<meta property="og:description" content="hexo部署问题按照教程部署完后发现页面仍旧没法更改，折腾大半天后发现github最近将默认分支的名字从master改成了main，而_config.yml中一般都将branch设置为master，导致master成为了副分支，github pages默认应用主分支main，所以没法更改页面（所以说政治正确真是害死人…大家约定俗成的事说改就改） 部署慢问题还没有发现问题所在，大概只能理解成访问gi">
+<meta property="og:description" content="替换空格一看到这道题我就优雅地敲下代码 12345class Solution &amp;#123;    public String replaceSpace(String s) &amp;#123;		return s.replace(&quot; &quot;,&quot;%20&quot;);    &amp;#125;&amp;#125;  …咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。 但其实">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-04-05T04:41:48.000Z">
-<meta property="article:modified_time" content="2022-04-06T13:58:43.059Z">
+<meta property="article:published_time" content="2022-04-09T07:57:22.000Z">
+<meta property="article:modified_time" content="2022-04-09T08:26:28.092Z">
 <meta property="article:author" content="Ykuri98">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="github">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649494701201">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649494701133">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649494701201">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649494701201">
-    <link rel="stylesheet" href="/css/style.css?v=1649494701201">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649494701133">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649494701133">
+    <link rel="stylesheet" href="/css/style.css?v=1649494701133">
      
     
 <meta name="generator" content="Hexo 5.4.1"></head>
@@ -194,21 +193,34 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
-              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="Github+hexo搭建博客遇到的坑" class="lazyload">
-              <h1>Github+hexo搭建博客遇到的坑</h1>
+              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="剑指offer-day3" class="lazyload">
+              <h1>剑指offer-day3</h1>
           </div>
       
       
       <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月05日</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月09日</a>
 </div>
 
       
 
-      <h2 id="hexo部署问题"><a href="#hexo部署问题" class="headerlink" title="hexo部署问题"></a>hexo部署问题</h2><p>按照教程部署完后发现页面仍旧没法更改，折腾大半天后发现github最近将默认分支的名字从master改成了main，而<code>_config.yml</code>中一般都将<code>branch</code>设置为master，导致master成为了副分支，github pages默认应用主分支main，所以没法更改页面（所以说政治正确真是害死人…大家约定俗成的事说改就改）</p>
-<h2 id="部署慢问题"><a href="#部署慢问题" class="headerlink" title="部署慢问题"></a>部署慢问题</h2><p>还没有发现问题所在，大概只能理解成访问github困难导致即使push成功网页也会刷新不及时。</p>
-<h2 id="图片CDN问题"><a href="#图片CDN问题" class="headerlink" title="图片CDN问题"></a>图片CDN问题</h2><p>nexmoe主题中的图片使用CDN保存，所以无法使用本地路径，但是图片也不能直接保存至<code>username.github.io</code>中，因为每次push都会导致仓库中保存的图片被删，所以在github中新建了一个仓库用来保存图片。</p>
-<h2 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h2><p>gitment已经停止使用！请用gitalk替代。</p>
+      <h2 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h2><p>一看到这道题我就优雅地敲下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">replaceSpace</span><span class="hljs-params">(String s)</span> &#123;<br>		<span class="hljs-keyword">return</span> s.replace(<span class="hljs-string">&quot; &quot;</span>,<span class="hljs-string">&quot;%20&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>…咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。</p>
+<p>但其实思路还是很简单，因为java的特性，字符串不能被直接修改，只能创建一个新对象，所以在空间复杂度上是怎么都干不过C++的。那么就新建一个可变字符串对象StringBuffer来接收修改后的String对象，可以最大程度优化空间。（其实可以替换为StringBulider，但是在本题中没有明显的优化）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">replaceSpace</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span>(s == <span class="hljs-literal">null</span> || s == <span class="hljs-string">&quot;&quot;</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(s.charAt(i) == <span class="hljs-string">&#x27; &#x27;</span>)&#123;<br>                res.append(<span class="hljs-string">&quot;%20&quot;</span>);<br>            &#125;<br>            <span class="hljs-keyword">else</span>&#123;<br>                res.append(s.charAt(i));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res.toString();<br>        <span class="hljs-comment">// return s.replace(&quot; &quot;,&quot;%20&quot;);</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后吐槽一下，自己写的方法时空复杂度甚至还没有包装好的replace()低…这道题可能只是单纯用来折磨C++程序员的吧…</p>
+<h2 id="左旋转字符串"><a href="#左旋转字符串" class="headerlink" title="左旋转字符串"></a>左旋转字符串</h2><p>一看到这我又优雅地敲下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseLeftWords</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">return</span> s.substring(n, s.length()) + s.substring(<span class="hljs-number">0</span>, n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>没想到这么写居然是对的，而且还是最优解…</p>
+<p>当然，我一开始并不是这么写的，而是仿造<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-string/">796.旋转字符串</a>的解来写的，用一个字符串来接收两个拼接起来的目标字符串，再返回其中与目标字符串等长的结果字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseLeftWords</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> s + s;<br>        <span class="hljs-keyword">return</span> s1.substring(n,s.length() + n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>空间复杂度当然没有API好，毕竟自创了一个字符串。</p>
+<p>（今天题目挺水的，不过周末了，就放过我吧）</p>
 
   </article>
 
@@ -216,7 +228,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>Author：</strong>Ykuri98<br>
-        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/05/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;05&#x2F;github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;05&#x2F;github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;</a><br>
+        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/09/%E5%89%91%E6%8C%87offer-day3/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;09&#x2F;%E5%89%91%E6%8C%87offer-day3&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;09&#x2F;%E5%89%91%E6%8C%87offer-day3&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -230,7 +242,7 @@
         <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
     
     
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/github/" rel="tag">github</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/hexo/" rel="tag">hexo</a>
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
     
 </div>
 
@@ -266,7 +278,7 @@
                               <button class="mdui-fab catalog" style="overflow:unset;">
                                   <i class="nexmoefont icon-i-catalog"></i>
                                   <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">hexo部署问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%85%A2%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">部署慢问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87CDN%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">图片CDN问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.</span> <span class="toc-text">评论系统</span></a></li></ol>
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.</span> <span class="toc-text">替换空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">左旋转字符串</span></a></li></ol>
                                   </div>
                               </button>
                           
@@ -298,7 +310,7 @@
 
  
 
-<script async src="/js/app.js?v=1649494701203"></script>
+<script async src="/js/app.js?v=1649494701144"></script>
 
 
 
