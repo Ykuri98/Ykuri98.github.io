@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>学习总结（2022.3.21-2022.3.30） - Ykuri的小角落</title>
+    <title>学习总结（2022.03.21-2022.03.30） - Ykuri的小角落</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -14,24 +14,24 @@
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
     <meta name="description" content="JVM内存  JVM栈。方法执行时占用的内存空间，方法以栈帧形式存储，方法内的局部变量会直接存储在栈帧中，方法执行完毕后出栈销毁，局部变量也被销毁。 堆。存储对象。new关键字即是在堆上开辟空间给对象。当没有引用指向对象时，该对象会被垃圾回收器执行垃圾回收机制(GC)回收内存。 方法区。 本地方法栈。存储JVM的本地(native)方法。 程序计数器：记录当前执行的行数。  传参问题java是值传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习总结（2022.3.21-2022.3.30）">
-<meta property="og:url" content="https://ykuri98.github.io/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/index.html">
+<meta property="og:title" content="学习总结（2022.03.21-2022.03.30）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.03.21-2022.03.30%EF%BC%89/index.html">
 <meta property="og:site_name" content="Ykuri的小角落">
 <meta property="og:description" content="JVM内存  JVM栈。方法执行时占用的内存空间，方法以栈帧形式存储，方法内的局部变量会直接存储在栈帧中，方法执行完毕后出栈销毁，局部变量也被销毁。 堆。存储对象。new关键字即是在堆上开辟空间给对象。当没有引用指向对象时，该对象会被垃圾回收器执行垃圾回收机制(GC)回收内存。 方法区。 本地方法栈。存储JVM的本地(native)方法。 程序计数器：记录当前执行的行数。  传参问题java是值传">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hixiaodong123.oss-cn-hangzhou.aliyuncs.com/typora/202112291934354.png?align=center">
 <meta property="og:image" content="https://hixiaodong123.oss-cn-hangzhou.aliyuncs.com/typora/202203201905318.png?align=center">
 <meta property="article:published_time" content="2022-04-06T12:41:48.000Z">
-<meta property="article:modified_time" content="2022-04-06T13:58:56.941Z">
+<meta property="article:modified_time" content="2022-04-09T09:22:18.413Z">
 <meta property="article:author" content="Ykuri98">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hixiaodong123.oss-cn-hangzhou.aliyuncs.com/typora/202112291934354.png?align=center">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649496012797">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1649639916527">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649496012797">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649496012797">
-    <link rel="stylesheet" href="/css/style.css?v=1649496012797">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1649639916527">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1649639916527">
+    <link rel="stylesheet" href="/css/style.css?v=1649639916527">
      
     
 <meta name="generator" content="Hexo 5.4.1"></head>
@@ -57,7 +57,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>7</div>
+        <div><span>Articles</span>8</div>
         <div><span>Tags</span>4</div>
         <div><span>Categories</span>1</div>
     </div>
@@ -138,7 +138,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">Archive</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">7</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -150,6 +150,10 @@
     <h3 class="nexmoe-widget-title">Recent Posts</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/2022/04/09/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.04.07-2022.04.09%EF%BC%89/">学习总结（2022.04.07-2022.04.09）</a>
+          </li>
         
           <li>
             <a href="/2022/04/09/%E5%89%91%E6%8C%87offer-day3/">剑指offer-day3</a>
@@ -164,11 +168,7 @@
           </li>
         
           <li>
-            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.31-2022.4.06%EF%BC%89/">学习总结（2022.3.31-2022.4.06）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/">学习总结（2022.3.21-2022.3.30）</a>
+            <a href="/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.03.31-2022.04.06%EF%BC%89/">学习总结（2022.03.31-2022.04.06）</a>
           </li>
         
       </ul>
@@ -196,8 +196,8 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
-              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="学习总结（2022.3.21-2022.3.30）" class="lazyload">
-              <h1>学习总结（2022.3.21-2022.3.30）</h1>
+              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="学习总结（2022.03.21-2022.03.30）" class="lazyload">
+              <h1>学习总结（2022.03.21-2022.03.30）</h1>
           </div>
       
       
@@ -262,7 +262,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>Author：</strong>Ykuri98<br>
-        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;06&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;06&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.3.21-2022.3.30%EF%BC%89&#x2F;</a><br>
+        <strong>Link：</strong><a href="https://ykuri98.github.io/2022/04/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.03.21-2022.03.30%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;06&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.03.21-2022.03.30%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;06&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022.03.21-2022.03.30%EF%BC%89&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -344,7 +344,7 @@
 
  
 
-<script async src="/js/app.js?v=1649496012801"></script>
+<script async src="/js/app.js?v=1649639916541"></script>
 
 
 
@@ -362,6 +362,16 @@
 
 
 
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 
 </body>
 
