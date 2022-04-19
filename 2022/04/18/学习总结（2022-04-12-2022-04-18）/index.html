@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.04.12-2022.04.20） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="IO的分类按照数据流向分(以内存为参照物)：  输入：外设-&gt;内存 输出：内存-&gt;外设  按照数据类型分：  字节流(1B &#x3D; 0000 0000) 字符流  字节流一般用于非文本文件；字符流一般用于文本文件。 为什么会有字符流？因为用字节流读取非英文和数字的数据可能会发生错误 4个抽象基类及其子类    字节输出流 字节输入流 字符输出流 字符输入流    抽象父类 OutputSt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.04.12-2022.04.20）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/18/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-12-2022-04-18%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="IO的分类按照数据流向分(以内存为参照物)：  输入：外设-&gt;内存 输出：内存-&gt;外设  按照数据类型分：  字节流(1B &#x3D; 0000 0000) 字符流  字节流一般用于非文本文件；字符流一般用于文本文件。 为什么会有字符流？因为用字节流读取非英文和数字的数据可能会发生错误 4个抽象基类及其子类    字节输出流 字节输入流 字符输出流 字符输入流    抽象父类 OutputSt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-18T12:48:51.000Z">
+<meta property="article:modified_time" content="2022-04-19T12:56:29.814Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1650376974121">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1650376974121">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1650376974121">
+    <link rel="stylesheet" href="/css/style.css?v=1650376974121">
+     
+    
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>14</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:ykuri98.github.io" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">13</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/18/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-12-2022-04-18%EF%BC%89/">学习总结（2022.04.12-2022.04.20）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/18/%E5%89%91%E6%8C%87offer-day8/">剑指offer-day8</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/16/%E5%89%91%E6%8C%87offer-day7/">剑指offer-day7</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/14/%E5%89%91%E6%8C%87offer-day6/">剑指offer-day6</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/13/%E5%89%91%E6%8C%87offer-day5/">剑指offer-day5</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="学习总结（2022.04.12-2022.04.20）" class="lazyload">
+              <h1>学习总结（2022.04.12-2022.04.20）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月18日</a>
+</div>
+
+      
+
+      <h2 id="IO的分类"><a href="#IO的分类" class="headerlink" title="IO的分类"></a>IO的分类</h2><p>按照数据流向分(以内存为参照物)：</p>
+<ul>
+<li>输入：外设-&gt;内存</li>
+<li>输出：内存-&gt;外设</li>
+</ul>
+<p>按照数据类型分：</p>
+<ul>
+<li>字节流(1B = 0000 0000)</li>
+<li>字符流</li>
+</ul>
+<p>字节流一般用于非文本文件；字符流一般用于文本文件。</p>
+<p>为什么会有字符流？因为用字节流读取非英文和数字的数据可能会发生错误</p>
+<h2 id="4个抽象基类及其子类"><a href="#4个抽象基类及其子类" class="headerlink" title="4个抽象基类及其子类"></a>4个抽象基类及其子类</h2><table>
+<thead>
+<tr>
+<th></th>
+<th align="center">字节输出流</th>
+<th>字节输入流</th>
+<th>字符输出流</th>
+<th>字符输入流</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象父类</td>
+<td align="center"><code>OutputStream&lt;br&gt;void write(byte[] b)</code></td>
+<td><code>InputStream&lt;br/&gt;int read(byte[] b)</code></td>
+<td><code>Writer&lt;br&gt;void write(char[] c)&lt;br/&gt;void writer(String s)</code></td>
+<td><code>Reader&lt;br&gt;int read(char[] c)</code></td>
+</tr>
+<tr>
+<td>文件</td>
+<td align="center"><code>FileOutputStream(File file, boolean append)</code></td>
+<td><code>FileInputStream(File file)</code></td>
+<td><code>FileWriter(File file,  boolean append)</code></td>
+<td><code>FileReader(File file)</code></td>
+</tr>
+<tr>
+<td>缓冲</td>
+<td align="center"><code>BufferedOutputStream(OutputSteam out, int size)</code></td>
+<td><code>BufferedInputStream(InputStream in, int size)</code></td>
+<td><code>BufferedWriter(Writer out,  int size)</code></td>
+<td><code>BufferedReader(Reader in,  int size)&lt;br&gt;String readLine()</code></td>
+</tr>
+<tr>
+<td>转换(字节转字符)</td>
+<td align="center"></td>
+<td></td>
+<td><code>OutputStreamWriter(OutputStream out,  String charsetName)</code></td>
+<td><code>InputStreamReader(InputStream in, String charsetName)</code></td>
+</tr>
+<tr>
+<td>数据(输入/输出java基本类型)</td>
+<td align="center"><code>DataOutputStream(OutputStream out)&lt;br&gt;void writeInt(int a)...</code></td>
+<td><code>DataInputStream(InputStream in)&lt;br&gt;int readInt()...</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>打印(输入/输出字符串)</td>
+<td align="center"><code>PrintStream(OutputStream out) &lt;br&gt;int print(int a)...</code></td>
+<td></td>
+<td><code>PrintWriter(Writer out)&lt;br&gt;int print(int a)</code></td>
+<td></td>
+</tr>
+<tr>
+<td>对象(序列化/反序列化)</td>
+<td align="center"><code>ObjectOutputStream(OutputStream out)&lt;br&gt;void writeObject(Object obj)</code></td>
+<td><code>ObjectInputStream(InputStream in)&lt;br&gt;Object readObject()</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="换行方式"><a href="#换行方式" class="headerlink" title="换行方式"></a>换行方式</h2><p>“\r\n”</p>
+<p><code>System.lineSeparator()</code></p>
+<h2 id="标准IO流"><a href="#标准IO流" class="headerlink" title="标准IO流"></a>标准IO流</h2><p><code>System.in</code>本质是<code>InputStream</code></p>
+<p><code>System.out</code>本质是<code>PrintStream</code></p>
+<h2 id="进程-线程-同步-异步"><a href="#进程-线程-同步-异步" class="headerlink" title="进程/线程 同步/异步"></a>进程/线程 同步/异步</h2><p>进程是操作系统调度的基本单位，线程是cpu调度的基本单位</p>
+<p>同步是调用可以立即得到结果，但是需要等待；异步是调用不能立即得到结果，但是可以不等待</p>
+<h2 id="java程序运行原理"><a href="#java程序运行原理" class="headerlink" title="java程序运行原理"></a>java程序运行原理</h2><p>jvm是多线程的，每次运行至少有两个线程：main线程和GC线程</p>
+<p>java是抢占式线程调度，但是java自带的setPriority()方法并不能改变线程的优先级，因为java中的优先级是静态的，只能给操作系统一个建议，实际上操作系统有自己的一套线程优先级</p>
+<h2 id="多线程的实现方式"><a href="#多线程的实现方式" class="headerlink" title="多线程的实现方式"></a>多线程的实现方式</h2><ol>
+<li>定义一个类继承Thread类，重写run()方法，创建该类对象，通过start()创建线程(如果使用run()只是普通的调用子类方法，并不能达到创建多线程的效果)特点：单继承</li>
+<li>定义一个类实现Runnable接口，重写run()方法，创建Runnable子类对象，再创建Thread对象，并将该子类对象作为参数传递。特点：实现接口</li>
+<li>定义一个类实现Callable接口，重写call()方法，创建FutureTask对象并将该类的对象作为参数传递，再创建Thread对象将FutureTask对象作为参数传递。特点：有返回值</li>
+</ol>
+<h2 id="线程API"><a href="#线程API" class="headerlink" title="线程API"></a>线程API</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 获得该线程的名称</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span>;<span class="hljs-comment">// 设置该线程的名称</span><br>Static Thread <span class="hljs-title function_">currentThread</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 返回当前正在执行的线程对象的引用</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">(<span class="hljs-type">long</span> millis)</span>;<span class="hljs-comment">// 线程休眠，进入阻塞，但是不释放资源</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">join</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 主线程等待执行该方法的子线程终止。join在哪个线程的代码块中被调用，该线程就是主线程；哪个线程调用了join，该线程就是子线程</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">setDaemon</span><span class="hljs-params">(<span class="hljs-type">boolean</span> on)</span>;<span class="hljs-comment">// 设置一个线程为守护线程。当正在运行的线程都为守护线程时，jvm停止运行；该方法必须在线程启动前调用；GC线程是守护线程。</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">wait</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 线程进入阻塞并释放资源。</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">notify</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 线程唤醒随机一个阻塞的进程。</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">notifyAll</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 线程唤醒全部进入阻塞的进程。</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="安全中断线程"><a href="#安全中断线程" class="headerlink" title="安全中断线程"></a>安全中断线程</h2><p>线程执行完毕就会中断。但是很多时候我们需要自己控制线程终止，然而API中的stop()方法存在线程不安全问题，所以一般定义一个成员变量boolean flag来控制。</p>
+<h2 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h2><p>基本语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(锁对象)&#123;<br>	<span class="hljs-comment">// 对共享数据的访问操作</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>锁对象可以是：</p>
+<ol>
+<li>任意一个Object及其子类对象，java中的任意对象都可以当锁，都存在wait()、notify()和notifyAll()方法。</li>
+<li>this关键字，即是令包含该代码块的类对象当锁。</li>
+<li>字节码文件对象(类名.class)</li>
+</ol>
+<h2 id="Lock类"><a href="#Lock类" class="headerlink" title="Lock类"></a>Lock类</h2><p>成员方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">lock();<span class="hljs-comment">// 获取锁</span><br>unlock();<span class="hljs-comment">//	释放锁</span><br></code></pre></td></tr></table></figure>
+
+<p>lock是一把真正的锁类，可以让我们看到加锁解锁的过程。</p>
+<h2 id="死锁的原因及解决方法"><a href="#死锁的原因及解决方法" class="headerlink" title="死锁的原因及解决方法"></a>死锁的原因及解决方法</h2><p>原因：一般出现在同步代码块嵌套，因为2个或以上的线程抢夺资源而造成互相等待。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(ObjA)&#123;<br>    <span class="hljs-keyword">synchronized</span>(objB)&#123;<br>    <br>	&#125;<br>&#125;<br><span class="hljs-keyword">synchronized</span>(objB)&#123;<br>    <span class="hljs-keyword">synchronized</span>(ObjA)&#123;<br>    <br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>解决方式：</p>
+<ol>
+<li>更改加锁顺序</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(ObjA)&#123;<br>    <span class="hljs-keyword">synchronized</span>(objB)&#123;<br>    <br>	&#125;<br>&#125;<br><span class="hljs-keyword">synchronized</span>(ObjA)&#123;<br>    <span class="hljs-keyword">synchronized</span>(objB)&#123;<br>    <br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>再加一把锁，将非原子操作改为原子操作</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span>(ObjC)&#123;<br>    <span class="hljs-keyword">synchronized</span>(objB)&#123;<br>    	<span class="hljs-keyword">synchronized</span>(objA)&#123;<br>            <br>        &#125;<br>	&#125;<br>&#125;<br><span class="hljs-keyword">synchronized</span>(objC)&#123;<br>    <span class="hljs-keyword">synchronized</span>(ObjA)&#123;<br>    	<span class="hljs-keyword">synchronized</span>(objB)&#123;<br>            <br>        &#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>线程池有三种子类：</p>
+<ol>
+<li><code>ExecutorService newCachedThreadPool()</code>：根据需要创建新线程，也可以自动删除，60s处于空闲状态的线程。线程数量可变。</li>
+<li><code>ExecutorService newFixedThreadPool(int nThreads)</code>：线程数量固定，维护一个无界队列（暂存已提交的来不及执行的任务），按照任务的提交顺序，将任务执行完毕。</li>
+<li><code>ExecutorService newSingleThreadExecutor()</code>：单个线程，其他特点如上。</li>
+</ol>
+<p>两种成员方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">submit</span><span class="hljs-params">(Runnable task)</span>;<span class="hljs-comment">// 提交任务</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">shutdown</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 启动顺序关闭</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="定时任务与定时器"><a href="#定时任务与定时器" class="headerlink" title="定时任务与定时器"></a>定时任务与定时器</h2><p>Timer定时器是一种工具，线程用其安排以后在后台线程中执行的任务。可安排任务执行一次，或者定期重复执行。</p>
+<p>两种构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Timer();<span class="hljs-comment">// 创建一个新计时器</span><br>Timer(<span class="hljs-type">boolean</span> isDaemon);<span class="hljs-comment">// 创建一个新计时器，可以指定其相关的线程作为守护程序运行</span><br></code></pre></td></tr></table></figure>
+
+<p>四种成员方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">schedule(TimerTask task, Date time);<span class="hljs-comment">// 从time时间开始执行。</span><br>schedule(TimerTask task, <span class="hljs-type">long</span> delay, <span class="hljs-type">long</span> period);<span class="hljs-comment">// 在延迟delay毫秒后，每period毫秒执行一次。</span><br>schedule(TimerTask task, Date firstTime, <span class="hljs-type">long</span> period);<span class="hljs-comment">// 从firstTime时间开始执行，之后每period毫秒执行一次。</span><br>scheduleAtFixedRate(TimerTask task, <span class="hljs-type">long</span> delay, <span class="hljs-type">long</span> period);<span class="hljs-comment">//	设置一个继承了TimerTask类的定时任务类，在延迟delay毫秒后，每period毫秒执行一次该任务。(TimerTask定时任务，使用时继承该类并重写run()方法)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="UDP-TCP"><a href="#UDP-TCP" class="headerlink" title="UDP/TCP"></a>UDP/TCP</h2><p>UDP发送端步骤：</p>
+<ol>
+<li><code>DatagramSocket datagramSocket = new DatagramSocket(int port);</code>    创建发送端的Socket对象</li>
+<li><code>DatagramPacket sendPacket= newDatagramPacket(byte[] buf,  int offset, int length, InetAddress address, int port);</code>    创建用于发送的数据报包</li>
+<li><code>datagramSocket.send(sendPacket);</code>    把包发送出去</li>
+<li><code>datagramSocket.close();</code>    关闭Socket</li>
+</ol>
+<p>UDP接收端步骤：</p>
+<ol>
+<li><code>DatagramSocket datagramSocket = new DatagramSocket(int port);</code>    创建接收端的Socket对象</li>
+<li><code>DatagramPacket receivePacket = new DatagramPacket(byte[] buf,  int offset, int length);</code>    创建用于接收的数据报包</li>
+<li><code>datagramSocket.receive(receivePacket);</code>    receive方法进行接收</li>
+<li><code>byte[] data = receivePacket.getData();</code>    解析数据</li>
+<li><code>datagramSocket.close();</code>    关闭Socket</li>
+</ol>
+<p>UDP可以通过多线程优化，达到两端互相通信的效果</p>
+<p>TCP客户端步骤：</p>
+<ol>
+<li><code>Socket socket = new Socket(String host,  int port);</code>    创建客户端的socket对象</li>
+<li><code>OutputStream out = socket.getOutputStream();</code>    从socket中获取输入/输出流</li>
+<li><code>out.write(byte[] b);</code>    利用输入/输出流进行读写操作</li>
+<li><code>socket.close();</code>    关闭Socket</li>
+</ol>
+<p>TCP服务端步骤：</p>
+<ol>
+<li><code>ServerSocket serverSocket = new ServerSocket(int port);</code>    创建服务端的ServerSocket 对象</li>
+<li><code>Socket socket = serverSocket.accept();</code>    利用accept方法建立连接,得到socket对象</li>
+<li><code>InputStream in = socket.getInputStream();</code>    从socket中获取输入/输出流</li>
+<li><code>in.read(byte[] b);</code>    利用输入/输出流进行读写操作</li>
+<li><code>socket.close();</code>    关闭Socket</li>
+</ol>
+<p>TCP可以通过ObjectInputStream/ObjectOutputStream来实现序列化/反序列化传输，也可以通过FileInputStream/FileOutputStream来实现文件传输。</p>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>反射时在类运行时获取其信息的一种技术，具体方式是获取字节码文件（也就是.class文件）对象，然后从对象中获取该类的构造器、变量、方法等成员，且能无视修饰符强行访问。</p>
+<p>获取字节码的三种方式：</p>
+<ol>
+<li>对象.getClass()</li>
+<li>类名.class</li>
+<li>Class.forName(String classname)   classname是全类名</li>
+</ol>
+<p>因为第三种才能获取较为完整的对象，一般使用第三种。</p>
+<p>反射获得构造方法的方式有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Constructor[] getConstructors();<span class="hljs-comment">// 获取所有public方法</span><br>Constructor[] getDeclaredConstructors();<span class="hljs-comment">// 获取所有构造方法，包括private</span><br>Constructor&lt;T&gt; <span class="hljs-title function_">getConstructor</span><span class="hljs-params">(Class&lt;?&gt;... parameterTypes)</span>;<span class="hljs-comment">// 获取单个public方法</span><br>Constructor&lt;T&gt; <span class="hljs-title function_">getDeclaredConstructor</span><span class="hljs-params">(Class&lt;?&gt;... parameterTypes)</span>;<span class="hljs-comment">// 获取单个构造方法，包括private</span><br></code></pre></td></tr></table></figure>
+
+<p>获得构造方法后可以创建对象。</p>
+<p><code>Object o = constructor.newInstance(&quot;张三&quot;, 20, true);</code></p>
+<p>如果构造器非public修饰，需要暴力破解。</p>
+<p><code>constructor.setAccessible(true);</code></p>
+<p>反射获得成员变量的方式有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Field[] getFields();<span class="hljs-comment">// 获取所有public变量</span><br>Field[] getDeclaredFields();<span class="hljs-comment">// 获取所有成员变量</span><br>Field <span class="hljs-title function_">getField</span><span class="hljs-params">(String name)</span>;<span class="hljs-comment">// 获取指定public成员变量</span><br>Field <span class="hljs-title function_">getDeclaredField</span><span class="hljs-params">(String name)</span>;<span class="hljs-comment">// 获取指定成员变量</span><br></code></pre></td></tr></table></figure>
+
+<p>获得成员变量后可以给成员变量赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> declaredConstructor.newInstance();<span class="hljs-comment">// 实例化对象</span><br>nameFiled.set(o, <span class="hljs-string">&quot;张三&quot;</span>);<span class="hljs-comment">// 对该对象的名字成员变量赋值</span><br></code></pre></td></tr></table></figure>
+
+<p>也可以获得某个成员变量。</p>
+<p><code>Object o1 = nameFiled.get(o);</code></p>
+<p>如果成员变量非public修饰，需要暴力破解，方式同上。</p>
+<p>反射获得成员方法的方式有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Method[] getMethods();<span class="hljs-comment">// 获取所有public方法</span><br>Method[] getDeclaredMethods();<span class="hljs-comment">// 获取所有方法</span><br>Method <span class="hljs-title function_">getMethod</span><span class="hljs-params">(String name, Class&lt;?&gt;... parameterTypes)</span>;<span class="hljs-comment">// 获取指定public方法</span><br>Method <span class="hljs-title function_">getDeclaredMethod</span><span class="hljs-params">(String name, Class&lt;?&gt;... parameterTypes)</span>;<span class="hljs-comment">// 获取指定方法</span><br></code></pre></td></tr></table></figure>
+
+<p>可以利用Method调用对象方法。</p>
+<p><code>Object invoke(Object obj, Object... args);</code></p>
+<p>第一个是要调用的对象，后面是多个可变参数类型。</p>
+<p>Class类API：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 获取全类名</span><br>String <span class="hljs-title function_">getSimpleName</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 获取简单名</span><br>Class&lt;?&gt; getInterfaces();<span class="hljs-comment">// 获取接口</span><br>Class&lt;?&gt; getSuperclass();<span class="hljs-comment">// 获取父类</span><br></code></pre></td></tr></table></figure>
+
+<p>Field类API：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Class&lt;?&gt; getType();<span class="hljs-comment">// 获取变量类型</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">getModifiers</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 获取变量类型，以int值表示，可用Modifier.toString()转为String</span><br></code></pre></td></tr></table></figure>
+
+<p>Method类API：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String <span class="hljs-title function_">getReturnType</span><span class="hljs-params">()</span>;<span class="hljs-comment">// 获取返回值类型</span><br>Class&lt;?&gt;[] getParameterTypes();<span class="hljs-comment">// 获取方法参数</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件(properties)里有各种配置信息，以键值对方式存储。</p>
+<p>配置文件中注释使用#号。</p>
+<p>Properties类表示了一个持久的属性集，可以获得配置文件中的数据。</p>
+<p>一种构造方法：</p>
+<p>​    <code>Properties()</code>    创建一个无默认值的空属性列表</p>
+<p>两种成员方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">load</span><span class="hljs-params">(InputStream inStream)</span>;<span class="hljs-comment">// 从输入流中读取属性列表（键和元素对）</span><br>String <span class="hljs-title function_">getProperty</span><span class="hljs-params">(String key)</span>;<span class="hljs-comment">// 用指定的键在此属性列表中搜索属性</span><br></code></pre></td></tr></table></figure>
+
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/04/18/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-12-2022-04-18%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;18&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-12-2022-04-18%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;18&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-12-2022-04-18%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/java/" rel="tag">java</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">IO的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E4%B8%AA%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AD%90%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">4个抽象基类及其子类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">换行方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86IO%E6%B5%81"><span class="toc-number">4.</span> <span class="toc-text">标准IO流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5"><span class="toc-number">5.</span> <span class="toc-text">进程&#x2F;线程 同步&#x2F;异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">java程序运行原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">多线程的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8BAPI"><span class="toc-number">8.</span> <span class="toc-text">线程API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E4%B8%AD%E6%96%AD%E7%BA%BF%E7%A8%8B"><span class="toc-number">9.</span> <span class="toc-text">安全中断线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#synchronized%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">10.</span> <span class="toc-text">synchronized关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lock%E7%B1%BB"><span class="toc-number">11.</span> <span class="toc-text">Lock类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">12.</span> <span class="toc-text">死锁的原因及解决方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">13.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">14.</span> <span class="toc-text">定时任务与定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-TCP"><span class="toc-number">15.</span> <span class="toc-text">UDP&#x2F;TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">16.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">17.</span> <span class="toc-text">配置文件</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1650376974141"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+
+</html>
