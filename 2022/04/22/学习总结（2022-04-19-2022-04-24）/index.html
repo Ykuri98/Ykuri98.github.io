@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.04.19-2022.04.24） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="类加载器分类：  Bootstrap ClassLoader 根类加载器，负责核心类的加载 Extension ClassLoader 扩展类加载器，负责扩展目录中jar包的加载 Sysetm(App) ClassLoader 系统类加载器&#x2F;应用加载器，负责自定义类的加载 User ClassLoader 自定义类加载器，自定义的类加载器  双亲委派模型：当自定义类进行类加载时，并不是一开始就由系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.04.19-2022.04.24）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/22/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-19-2022-04-24%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="类加载器分类：  Bootstrap ClassLoader 根类加载器，负责核心类的加载 Extension ClassLoader 扩展类加载器，负责扩展目录中jar包的加载 Sysetm(App) ClassLoader 系统类加载器&#x2F;应用加载器，负责自定义类的加载 User ClassLoader 自定义类加载器，自定义的类加载器  双亲委派模型：当自定义类进行类加载时，并不是一开始就由系">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-22T13:07:10.000Z">
+<meta property="article:modified_time" content="2022-04-22T15:15:58.347Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1650897115407">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1650897115407">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1650897115407">
+    <link rel="stylesheet" href="/css/style.css?v=1650897115407">
+     
+    
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>26</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:ykuri98.github.io" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">25</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">26</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/25/%E5%89%91%E6%8C%87offer-day19/">剑指offer-day19</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/25/%E5%89%91%E6%8C%87offer-day18/">剑指offer-day18</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%89%91%E6%8C%87offer-day17/">剑指offer-day17</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%89%91%E6%8C%87offer-day16/">剑指offer-day16</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/22/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-19-2022-04-24%EF%BC%89/">学习总结（2022.04.19-2022.04.24）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" data-sizes="auto" alt="学习总结（2022.04.19-2022.04.24）" class="lazyload">
+              <h1>学习总结（2022.04.19-2022.04.24）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月22日</a>
+</div>
+
+      
+
+      <h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>分类：</p>
+<ol>
+<li>Bootstrap ClassLoader 根类加载器，负责核心类的加载</li>
+<li>Extension ClassLoader 扩展类加载器，负责扩展目录中jar包的加载</li>
+<li>Sysetm(App) ClassLoader 系统类加载器/应用加载器，负责自定义类的加载</li>
+<li>User ClassLoader 自定义类加载器，自定义的类加载器</li>
+</ol>
+<p>双亲委派模型：当自定义类进行类加载时，并不是一开始就由系统类加载器进行加载的，而是会交给扩展类加载器，扩展类加载器又会交给根类加载器，但是根类加载器在核心类的jar包中找不到自定义的类，于是又会原路返回至系统类加载器，最后还是由系统类加载器执行。</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解是代码里面的一些特殊标记，可以在编译、类加载、运行时被读取，并执行相应的处理。注解可以在不改变原有逻辑的情况下，补充一些信息。注解作为一种数据类型，跟class、interface具有同等地位。</p>
+<p>注解的使用方式与修饰符一样，可以给任何一种数据写上注解（类、接口、构造器、变量…）</p>
+<p>自定义注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 语法</span><br>权限修饰符 <span class="hljs-meta">@interface</span> 注解名字&#123;<br>    <span class="hljs-comment">// 注解体</span><br>     属性类型 属性名();<br>     属性类型 属性名();<br>     属性类型 属性名();<br>    .....<br>&#125;<br><br><span class="hljs-comment">//举例</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyAnno &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注解的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// @注解名(属性1 = value1,属性2 = value2)</span><br><br>    <span class="hljs-comment">// 注解使用</span><br>    <span class="hljs-meta">@MyAnno3(name = &quot;zs&quot;,age = 20)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">func</span><span class="hljs-params">()</span> &#123;<br>        <br>    &#125;<br><br><br><span class="hljs-comment">// 例子：获取注解信息</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception&#123;<br>        <span class="hljs-comment">//获取Login注解里的信息 打印一下</span><br>        <span class="hljs-comment">// 获取字节码文件对象</span><br>        Class&lt;?&gt; c = Class.forName(<span class="hljs-string">&quot;_23annotation.com.cskaoyan._04handle.Demo&quot;</span>);<br>        <span class="hljs-comment">// 获取方法对象</span><br>        <span class="hljs-type">Method</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> c.getDeclaredMethod(<span class="hljs-string">&quot;login&quot;</span>);<br>        <span class="hljs-comment">// 再判断方法上使用了注解  isAnnotationPresent</span><br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">annotationPresent</span> <span class="hljs-operator">=</span> method.isAnnotationPresent(Login.class);<br>        System.out.println(annotationPresent);<br>        <span class="hljs-keyword">if</span> (annotationPresent) &#123;<br>            <span class="hljs-comment">// 是 , 获取这个注解实例  getAnnotation</span><br>            <span class="hljs-type">Login</span> <span class="hljs-variable">annotation</span> <span class="hljs-operator">=</span> method.getAnnotation(Login.class);<br>            <span class="hljs-comment">// 获取属性</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> annotation.name();<br>            <span class="hljs-type">String</span> <span class="hljs-variable">password</span> <span class="hljs-operator">=</span> annotation.password();<br>            System.out.println(name);<br>            System.out.println(password);<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-meta">@Login</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">login</span><span class="hljs-params">()</span> &#123;<br><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 使用元注解修饰</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Target(ElementType.METHOD)</span><br><span class="hljs-meta">@interface</span> Login &#123;<br>    <span class="hljs-comment">// 定义属性</span><br>    String <span class="hljs-title function_">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;root&quot;</span>;<br>    String <span class="hljs-title function_">password</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;123456&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>元注解：描述注解的注解。常用的元注解有：</p>
+<ol>
+<li><p><code>@Retention</code>元注解，来定义我们自己定义的注解的保留级别.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">RetentionPolicy.RUNTIME<br>RetentionPolicy.CLASS  <span class="hljs-comment">// 默认</span><br>RetentionPolicy.SOURCE<br></code></pre></td></tr></table></figure></li>
+<li><p><code>@Target</code>元注解，注解可以作用的目标</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">ElementType.TYPE<span class="hljs-comment">// 整个类</span><br>ElementType.FIELD<span class="hljs-comment">// 成员变量   </span><br>ElementType.CONSTRUCTOR<span class="hljs-comment">// 构造方法   </span><br>ElementType.METHO<span class="hljs-comment">// 成员方法   </span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>如何确定垃圾：</p>
+<ol>
+<li>引用计数算法：给对象添加一个引用计数器，每当有引用指向它，计数器+1；每当引用失效，计数器-1。当计数器为0，表示该对象不可被引用。但是引用计数算法无法应用在循环引用中。</li>
+<li>根搜索算法：以一个叫”GC Roots”的对象为起点向下搜索，看一个对象是否存在连接至GC Root的引用链，如果没有表示该对象不可被引用。GC使用根搜索算法。</li>
+</ol>
+<p>如何回收垃圾：</p>
+<ol>
+<li><p>标记清除算法：首先标记出所有需要回收的对象，再统一回收；或者标记出所有存活的对象，统一回收未被标记的对象。虽然实现简单，但是会产生很多内存碎片。</p>
+</li>
+<li><p>标记复制算法：将一块内存划分成容量相等的两块，每次使用其中一块，当内存用完后，将还存活的对象复制至另一块内存中，再把已满的内存全部清理。虽然实现简单且不容易产生内存碎片，但是内存利用率降低了，且存活对象较多时，会产生许多不必要的开销，降低效率。</p>
+</li>
+<li><p>标记整理算法：同标记清除算法一样，将所有需要回收的对象标记，但是它不会直接清理，而是将存活的对象都往一端移动，移动完成后清除边界外的所有对象。这样虽然不会产生内存碎片，但是效率却降低了。</p>
+</li>
+<li><p>分代收集算法：根据对象的存活时间将内存划分为新生代、老年代和永久代，新生代中的对象大部分都是存活时间较短的，老年代中的对象则是存活时间较长的。</p>
+<p>新创建的对象会放入新生代中，新生代空间使用的是标记复制算法，将新生代空间划为一个eden空间和两个survivor空间（survivor1、survivor2），其中eden空间用来放置新建的对象，survivor1和survivor2则用来放置复制一遍和复制两遍后存活的对象。当过了一定时间后，survivor2中的对象会放至老年代。</p>
+<p>老年代中因为存活对象较多，一般使用标记整理算法。</p>
+</li>
+</ol>
+<p>何时回收垃圾：</p>
+<ol>
+<li>申请堆空间失败，表示堆空间已满，触发GC。</li>
+<li>系统进入休眠一段时间触发GC。</li>
+<li>主动调用GC。</li>
+</ol>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>五大原则：</p>
+<ol>
+<li>单一职责原则：每个类只负责自己的部分。</li>
+<li>开闭原则：一个类或模块应该对拓展开放，对修改关闭。</li>
+<li>里氏替换原则：任何父类可以出现的地方，子类都可以出现。</li>
+<li>接口隔离原则：一个接口只提供一个对外的功能。</li>
+<li>依赖倒置原则：上层模块不应该依赖于底层模块，而应该依赖于抽象类或接口；抽象类或接口不应该依赖于具体实现类，具体实现类应该依赖于抽象类或接口。</li>
+</ol>
+<p>单例设计模式：</p>
+<p>保证一个类只有一个对象，防止频繁的创建和销毁对象，避免对共享资源的多重占用。</p>
+<p>实现方法：构造方法私有；提供返回实例的静态方法；提供自身类型的全局变量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton1</span> &#123;<br>    <span class="hljs-comment">//-  提供自身类型的全局的成员变量</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton1 instance;<br>    <span class="hljs-comment">// -  构造方法私有</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton1</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br><br>    <span class="hljs-comment">//-  提供静态方法,返回实例</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton1 <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 最终要返回singleton1对象</span><br>        <span class="hljs-comment">// 做判断</span><br>        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton1</span>();<br>        &#125;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>工厂设计模式：</p>
+<p>可以通过一个工厂批量生产对象，同时隐藏创建对象的一些细节，标准化产生实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FruitFactory</span> &#123;<br>    <span class="hljs-comment">// 提供1个静态方法 返回具体水果对象</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Fruit <span class="hljs-title function_">getInstance</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-type">Fruit</span> <span class="hljs-variable">fruit</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;apple&quot;</span>.equals(name)) &#123;<br>            fruit = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Apple</span>();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;orange&quot;</span>.equals(name)) &#123;<br>            fruit = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Orange</span>();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;banana&quot;</span>.equals(name)) &#123;<br>            fruit = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Banana</span>();<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;生产不了!&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 返回水果对象</span><br>        <span class="hljs-keyword">return</span> fruit;<br>    &#125;<br><br><br>    <span class="hljs-comment">// 不修改原有的代码逻辑 实现功能</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Fruit <span class="hljs-title function_">getInstance2</span><span class="hljs-params">(String className)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 根据全限定名 获取字节码文件对象</span><br>        Class&lt;?&gt; c = Class.forName(className);<br>        <span class="hljs-comment">// 获取构造方法</span><br>        Constructor&lt;?&gt; declaredConstructor = c.getDeclaredConstructor();<br><br>        <span class="hljs-comment">// 实例化对象</span><br>        <span class="hljs-type">Fruit</span> <span class="hljs-variable">fruit</span> <span class="hljs-operator">=</span> (Fruit) declaredConstructor.newInstance();<br><br>        <span class="hljs-comment">// 返回对象</span><br>        <span class="hljs-keyword">return</span> fruit;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/04/22/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-19-2022-04-24%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;22&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-19-2022-04-24%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;22&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-19-2022-04-24%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/java/" rel="tag">java</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">类加载器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC"><span class="toc-number">3.</span> <span class="toc-text">GC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">设计模式</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1650897115424"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+
+</html>
