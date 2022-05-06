@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>剑指offer-day3 - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="替换空格一看到这道题我就优雅地敲下代码 12345class Solution &amp;#123;    public String replaceSpace(String s) &amp;#123;		return s.replace(&quot; &quot;,&quot;%20&quot;);    &amp;#125;&amp;#125;  …咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。 但其实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer-day3">
+<meta property="og:url" content="https://ykuri98.github.io/2022/04/09/%E5%89%91%E6%8C%87offer-day3/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="替换空格一看到这道题我就优雅地敲下代码 12345class Solution &amp;#123;    public String replaceSpace(String s) &amp;#123;		return s.replace(&quot; &quot;,&quot;%20&quot;);    &amp;#125;&amp;#125;  …咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。 但其实">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-09T07:57:22.000Z">
+<meta property="article:modified_time" content="2022-04-09T08:26:28.092Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1651833023060">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1651833023060">
+    <link rel="stylesheet" href="/css/style.css?v=1651833023060">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <!--动态线条背景-->
+    <script type="text/javascript"
+    color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>32</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">31</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/04/Hexo%E7%BE%8E%E5%8C%96%E8%AE%B0%E5%BD%95/">Hexo美化记录</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/30/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-04-25-2022-04-30%EF%BC%89/">学习总结（2022.04.25-2022.04.30）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/29/%E5%89%91%E6%8C%87offer-day23/">剑指offer-day23</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/28/%E5%89%91%E6%8C%87offer-day22/">剑指offer-day22</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/27/%E5%89%91%E6%8C%87offer-day21/">剑指offer-day21</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="剑指offer-day3" loading="lazy">
+              <h1>剑指offer-day3</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月09日</a>
+</div>
+
+      <h2 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h2><p>一看到这道题我就优雅地敲下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">replaceSpace</span><span class="hljs-params">(String s)</span> &#123;<br>		<span class="hljs-keyword">return</span> s.replace(<span class="hljs-string">&quot; &quot;</span>,<span class="hljs-string">&quot;%20&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>…咳咳，大佬说过，不要成为API Coder，不然35岁就去开滴滴了。</p>
+<p>但其实思路还是很简单，因为java的特性，字符串不能被直接修改，只能创建一个新对象，所以在空间复杂度上是怎么都干不过C++的。那么就新建一个可变字符串对象StringBuffer来接收修改后的String对象，可以最大程度优化空间。（其实可以替换为StringBulider，但是在本题中没有明显的优化）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">replaceSpace</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span>(s == <span class="hljs-literal">null</span> || s == <span class="hljs-string">&quot;&quot;</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(s.charAt(i) == <span class="hljs-string">&#x27; &#x27;</span>)&#123;<br>                res.append(<span class="hljs-string">&quot;%20&quot;</span>);<br>            &#125;<br>            <span class="hljs-keyword">else</span>&#123;<br>                res.append(s.charAt(i));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res.toString();<br>        <span class="hljs-comment">// return s.replace(&quot; &quot;,&quot;%20&quot;);</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后吐槽一下，自己写的方法时空复杂度甚至还没有包装好的replace()低…这道题可能只是单纯用来折磨C++程序员的吧…</p>
+<h2 id="左旋转字符串"><a href="#左旋转字符串" class="headerlink" title="左旋转字符串"></a>左旋转字符串</h2><p>一看到这我又优雅地敲下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseLeftWords</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">return</span> s.substring(n, s.length()) + s.substring(<span class="hljs-number">0</span>, n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>没想到这么写居然是对的，而且还是最优解…</p>
+<p>当然，我一开始并不是这么写的，而是仿造<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-string/">796.旋转字符串</a>的解来写的，用一个字符串来接收两个拼接起来的目标字符串，再返回其中与目标字符串等长的结果字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseLeftWords</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> s + s;<br>        <span class="hljs-keyword">return</span> s1.substring(n,s.length() + n);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>空间复杂度当然没有API好，毕竟自创了一个字符串。</p>
+<p>（今天题目挺水的，不过周末了，就放过我吧）</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/04/09/%E5%89%91%E6%8C%87offer-day3/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;09&#x2F;%E5%89%91%E6%8C%87offer-day3&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;04&#x2F;09&#x2F;%E5%89%91%E6%8C%87offer-day3&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.</span> <span class="toc-text">替换空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">左旋转字符串</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1651833023065"></script>
+
+
+	<script async src="/js/search.js?v=1651833023065"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>
