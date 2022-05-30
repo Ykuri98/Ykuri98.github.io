@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.05.10-2022.05.16） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="关系型数据库与非关系型数据库关系型数据库：不仅存储数据，也存储数据与数据间的关系。一般存储在磁盘上，读取较慢。 非关系型数据库：仅仅用于存储数据，不能存储数据间的关系。但是一般存储在内存中，读取较快。 SQL语句库的操作 123456create database dbName;# 添加库drop database dbName;# 删除库alter database dbName charact">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.05.10-2022.05.16）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/05/16/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="关系型数据库与非关系型数据库关系型数据库：不仅存储数据，也存储数据与数据间的关系。一般存储在磁盘上，读取较慢。 非关系型数据库：仅仅用于存储数据，不能存储数据间的关系。但是一般存储在内存中，读取较快。 SQL语句库的操作 123456create database dbName;# 添加库drop database dbName;# 删除库alter database dbName charact">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-16T06:21:28.000Z">
+<meta property="article:modified_time" content="2022-05-23T12:26:36.294Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1653919078844">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1653919078844">
+    <link rel="stylesheet" href="/css/style.css?v=1653919078844">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <!--动态线条背景-->
+    <script type="text/javascript"
+    color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>36</div>
+        <div><span>标签</span>7</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">35</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">36</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/26/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-24-2022-05-26%EF%BC%89/">学习总结（2022.05.24-2022.05.26）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/">学习总结（2022.05.17-2022.05.23）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/16/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89/">学习总结（2022.05.10-2022.05.16）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89/">学习总结（2022.05.01-2022.05.09）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/04/Hexo%E7%BE%8E%E5%8C%96%E8%AE%B0%E5%BD%95/">Hexo美化记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="学习总结（2022.05.10-2022.05.16）" loading="lazy">
+              <h1>学习总结（2022.05.10-2022.05.16）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月16日</a>
+</div>
+
+      <h2 id="关系型数据库与非关系型数据库"><a href="#关系型数据库与非关系型数据库" class="headerlink" title="关系型数据库与非关系型数据库"></a>关系型数据库与非关系型数据库</h2><p>关系型数据库：不仅存储数据，也存储数据与数据间的关系。一般存储在磁盘上，读取较慢。</p>
+<p>非关系型数据库：仅仅用于存储数据，不能存储数据间的关系。但是一般存储在内存中，读取较快。</p>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p>库的操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database dbName;# 添加库<br><span class="hljs-keyword">drop</span> database dbName;# 删除库<br><span class="hljs-keyword">alter</span> database dbName <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> utf8 <span class="hljs-keyword">collate</span> utf8_bin;# 修改库的字符集和校对规则(不能修改名字)<br><span class="hljs-keyword">show</span> databases;# 查询所有的库<br><span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> database dbName;# 查询对应库的建库语句<br>use dbName;# 选中库(重要)<br></code></pre></td></tr></table></figure>
+
+<p>表的操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> tableName(<br>    columnName1 dataType,<br>    columnName2 dataType,<br>    ...<br>	) <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> utf8 <span class="hljs-keyword">collate</span> utf8_bin;# 创建表(后面为设置表的字符集和校对规则)<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> tableName;# 删除表<br>rename <span class="hljs-keyword">table</span> tableName <span class="hljs-keyword">to</span> newTableName;# 修改表名<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> latin1 <span class="hljs-keyword">collate</span> latin1_bin;# 修改表的字符集和校对规则<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName <span class="hljs-keyword">add</span> columnName dataType;# 添加列(列名后跟列的数据类型)<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName <span class="hljs-keyword">drop</span> columnName;# 删除列<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName modify columnName dataType;# 修改列的类型<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName change columnName newColumnName dataType;# 修改列的类型和名字<br><span class="hljs-keyword">show</span> tables;# 查询所有表<br><span class="hljs-keyword">describe</span>  tableName;# 查询表结构<br><span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> tableName;# 查询建表语句<br></code></pre></td></tr></table></figure>
+
+<p>数据的操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> tableName <span class="hljs-keyword">values</span> <br>	(...),<br>	(...),<br>    ...<br>;# 插入数据<br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> tableName columnName  <span class="hljs-operator">=</span> ...;# 删除数据<br><span class="hljs-keyword">update</span> tableName <span class="hljs-keyword">set</span> columnName <span class="hljs-operator">=</span> ...  <span class="hljs-keyword">where</span> columnName <span class="hljs-operator">=</span> ...;# 修改数据<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> tableName;# 查找所有数据<br><span class="hljs-keyword">select</span> columnName <span class="hljs-keyword">from</span> tableName;# 查找该列数据<br></code></pre></td></tr></table></figure>
+
+<p>关键字：</p>
+<ol>
+<li>where：寻找符合条件的指定数据行。</li>
+<li>distinct：过滤结果相同的记录。</li>
+<li>limit：限制显示的行数。</li>
+<li>as：别名，对查询结果的列和表起名。</li>
+<li>order by：排序。可接desc表示降序。</li>
+<li>group by：分组。可接having对分组后的结果进行过滤。</li>
+</ol>
+<p>聚合函数：</p>
+<ol>
+<li>max：最大值</li>
+<li>min：最小值</li>
+<li>avg：平均值</li>
+<li>sum：总和</li>
+<li>count：计数</li>
+</ol>
+<p>SQL语句执行顺序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">(<span class="hljs-number">5</span>) <span class="hljs-keyword">SELECT</span> column_name, ... <br>(<span class="hljs-number">1</span>) <span class="hljs-keyword">FROM</span> table_name, ... <br>(<span class="hljs-number">2</span>) [<span class="hljs-keyword">WHERE</span> ...] <br>(<span class="hljs-number">3</span>) [<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> ...] <br>(<span class="hljs-number">4</span>) [<span class="hljs-keyword">HAVING</span> ...] <br>(<span class="hljs-number">6</span>) [<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> ...]<br>(<span class="hljs-number">7</span>)	[Limit ...]<br></code></pre></td></tr></table></figure>
+
+<h2 id="数据完整性"><a href="#数据完整性" class="headerlink" title="数据完整性"></a>数据完整性</h2><p>实体完整性：确定表中数据是唯一且不重复的，确保用户不会输入重复的数据，实现的关键是主键。主键是一行数据中唯一不允许重复和值为null的字段。主键一般可以自增。在建表时可以声明一个字段为主键。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> tableName(<br>	columnName dataType <span class="hljs-keyword">PRIMARY</span> KEY auto_increment# 声明为主键且自增<br>) auto_increment<span class="hljs-operator">=</span><span class="hljs-number">1000</span># 设置自增的起始数<br></code></pre></td></tr></table></figure>
+
+<p>域完整性：每一个字段都应该有类型以约束值。也可以使用unique（值唯一）和not null（值不为空）来约束值。unique修饰的字段可以为空。</p>
+<p>参照完整性：一个表如果存在外键，那么这个外键应该与另一个表的主键相对应。外键使用foreign key来声明。</p>
+<h2 id="三大范式"><a href="#三大范式" class="headerlink" title="三大范式"></a>三大范式</h2><p>第一范式：每一列应该保持原子性。原子性表示表中的数据都是一个不可拆分的最小单元。</p>
+<p>第二范式：数据应该有唯一性。唯一性表示每一条数据都有唯一的标识，如主键。</p>
+<p>第三范式：数据不应该冗余。</p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>内连接inner join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> user_detail <span class="hljs-keyword">on</span> <br>user.id <span class="hljs-operator">=</span> user_detail.user_id;<br></code></pre></td></tr></table></figure>
+
+<p>外连接outer join</p>
+<p>外连接分为左连接和右连接，使用左连接时会保留左表数据，右连接反之。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> user_detail <span class="hljs-keyword">on</span> <br>user.id <span class="hljs-operator">=</span> user_detail.user_id;<br></code></pre></td></tr></table></figure>
+
+<p>嵌套查询</p>
+<p>一个SQL语句的结果可以作为另一个SQL语句的条件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> student <span class="hljs-keyword">where</span> clazz_id <span class="hljs-operator">=</span> <br>(<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> clazz <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;一班&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>JDBC是java的一套连接数据库的标准接口。但JDBC只提供接口，具体的实现(如何连接数据库)由数据库厂家的驱动实现，如MySQL的mysql-connector。</p>
+<p>JDBC的使用如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.加载驱动  </span><br>      DriverManager.registerDriver(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Driver</span>());<br><br><span class="hljs-comment">// String url = &quot;协议 + ip + 端口 + 路径 + 参数&quot;;</span><br>      <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/40th?useSSL=false&amp;characterEncoding=utf8&quot;</span>;<br>      <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root&quot;</span>;<br>      <span class="hljs-type">String</span> <span class="hljs-variable">password</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;123456&quot;</span>;<br><br>      <span class="hljs-comment">// 2.发送用户名和密码，建立连接</span><br>      <span class="hljs-comment">// 返回的当前是一个Connection接口，但是实际上在运行的时候，返回是Connection接口的实现类的实例</span><br>      <span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> DriverManager.getConnection(url, username, password);<br><br>      <span class="hljs-comment">// 3.获取statement对象</span><br>      <span class="hljs-type">Statement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> connection.createStatement();<br><br>      <span class="hljs-comment">// 4.发送SQL语句</span><br><span class="hljs-comment">// 增删改使用executeUpdate方法</span><br>      <span class="hljs-type">int</span> <span class="hljs-variable">affectedRows</span> <span class="hljs-operator">=</span> statement.executeUpdate(<span class="hljs-string">&quot;insert into stu values (4,&#x27;云飞兄&#x27;,20,&#x27;358班&#x27;)&quot;</span>);<br><span class="hljs-comment">// 查使用executeQuery方法</span><br><span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultSet</span> <span class="hljs-operator">=</span> statement.executeQuery(<span class="hljs-string">&quot;select * from stu&quot;</span>);<br><br>      <span class="hljs-comment">// 5.解析结果集</span><br>      System.out.println(<span class="hljs-string">&quot;affectedRows:&quot;</span> + affectedRows);<br><span class="hljs-keyword">while</span> (resultSet.next()) &#123;<br>	<span class="hljs-type">int</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> resultSet.getInt(<span class="hljs-string">&quot;id&quot;</span>);<br>	<span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> resultSet.getString(<span class="hljs-string">&quot;name&quot;</span>);<br>          <span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> resultSet.getInt(<span class="hljs-string">&quot;age&quot;</span>);<br>          <span class="hljs-type">String</span> <span class="hljs-variable">className</span> <span class="hljs-operator">=</span> resultSet.getString(<span class="hljs-string">&quot;class&quot;</span>);<br><br>          System.out.println(<span class="hljs-string">&quot;id:&quot;</span> + id);<br>          System.out.println(<span class="hljs-string">&quot;name:&quot;</span> + name);<br>          System.out.println(<span class="hljs-string">&quot;age:&quot;</span> + age);<br>          System.out.println(<span class="hljs-string">&quot;className:&quot;</span> + className);<br>&#125;<br><br>      <span class="hljs-comment">// 6.断开连接</span><br>resultSet.close();<br>      statement.close();<br>      connection.close();<br></code></pre></td></tr></table></figure>
+
+<h2 id="数据库注入"><a href="#数据库注入" class="headerlink" title="数据库注入"></a>数据库注入</h2><p>在使用Statement时，如果输入的SQL语句是字符串拼接而成的，那么用户就可能输入一些包含SQL关键字的字符，这样就可能改变SQL语句的格式，引发安全性的问题。</p>
+<p>解决方式是使用PreparedStatement(预编译的Statement)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 在创建PreparedStatement的时候，PreparedStatement会把当前这个没有参数的SQL语句，发送给MySQL服务器，执行预编译</span><br><span class="hljs-comment">// 预编译：其实就是去解析这个SQL语句中的关键字，变成MySQL可以执行的命令</span><br><span class="hljs-comment">// 在预编译之后，后续输入的字符串，就只会被MySQL当成纯文本来解析</span><br><span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> connection.prepareStatement(<span class="hljs-string">&quot;select * from user where name = ? and password = ?&quot;</span>);<br><br><span class="hljs-comment">// 设置参数</span><br>preparedStatement.setString(<span class="hljs-number">1</span>,username);<br>preparedStatement.setString(<span class="hljs-number">2</span>,password);<br><br><span class="hljs-comment">// 传递参数，执行SQL语句</span><br><span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultSet</span> <span class="hljs-operator">=</span> preparedStatement.executeQuery();<br></code></pre></td></tr></table></figure>
+
+<p>在安全性上，PreparedStatement要比Statement安全；在效率上，因为PreparedStatement需要与数据库通信两次，一次传输预编译的SQL语句，一次传输参数，所以相比于只通信一次的Statement要慢一些。</p>
+<h2 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h2><p>对SQL语句有三种批处理的方式：</p>
+<p>for循环插入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// for循环</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">batchUseForEach</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br><br>    <span class="hljs-type">Statement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> connection.createStatement();<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;insert into user values (&quot;</span>+i+<span class="hljs-string">&quot;,&#x27;foreach&#x27;,null,null)&quot;</span>;<br><br>        statement.executeUpdate(sql);<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>statement批处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Statement处理</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">batchUseStatement</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br><br>    <span class="hljs-type">Statement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> connection.createStatement();<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">10000</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;insert into user values (&quot;</span>+i+<span class="hljs-string">&quot;,&#x27;batchUseStatement&#x27;,null,null)&quot;</span>;<br>        statement.addBatch(sql);<br>    &#125;<br><br>    <span class="hljs-comment">// 发送SQL语句，执行</span><br>    statement.executeBatch();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>PreparedStatement批处理</p>
+<p>需要在数据库的url后面加上配置<code>rewriteBatchedStatements=true</code> ，表示开启批处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// PreparedStatement处理</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">batchUsePrepapreStatement</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br><br>    <span class="hljs-comment">// 获取PreparedStatement</span><br>    <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> connection.prepareStatement(<span class="hljs-string">&quot;insert into user values (?,?,null,null)&quot;</span>);<br><br>    <span class="hljs-comment">// 循环，设置参数</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">20000</span>; i &lt; <span class="hljs-number">30000</span>; i++) &#123;<br>        preparedStatement.setInt(<span class="hljs-number">1</span>,i);<br>        preparedStatement.setString(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;PrepapreStatement&quot;</span>);<br>        preparedStatement.addBatch();<br>    &#125;<br><br>    <span class="hljs-comment">// 把参数发送给MySQL服务器，执行SQL语句</span><br>    preparedStatement.executeBatch();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>由代码可知，三种方式与SQL服务器的通信次数、SQL语句的编译次数和执行次数如下表。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>通信次数</th>
+<th>编译次数</th>
+<th>执行次数</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>for循环</td>
+<td>n</td>
+<td>n</td>
+<td>n</td>
+<td>最长</td>
+</tr>
+<tr>
+<td>Statement</td>
+<td>1</td>
+<td>n</td>
+<td>n</td>
+<td>次之</td>
+</tr>
+<tr>
+<td>PreparedStatement</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>最短</td>
+</tr>
+</tbody></table>
+<p>然而通过实际测试发现在数据较大（&gt;&#x3D; 1000000）的情况下statement批处理的时间要长于for循环，可能原因是操作系统对内存的分配：在for循环中，每一次循环时操作系统不必去一直维护内存，在一次循环结束后可以将内存释放；而statement批处理时操作系统需要维护内存去记录sql语句，这导致了statement批处理的时间变长。</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务是指组成事务的一组操作，这些操作要么一起操作成功，要么一起操作不成功。</p>
+<p>事务具有四个特性：</p>
+<ol>
+<li>原子性。事务是一个不可分割的操作单元，里面的一组操作要么都成功，要么都不成功。</li>
+<li>一致性。事务必须使数据库从一个一致性状态到另一个一致性状态（比如无论怎么转账，所有账户的总金额应该不变）。</li>
+<li>隔离性。事务与事务间应该互相隔离，互不影响。</li>
+<li>持久性。一个事务一旦生效，对数据库的改变是永久的，即事务提交以后就无法回滚。</li>
+</ol>
+<p>针对事务的隔离性，提出了事务的四个隔离级别：</p>
+<ol>
+<li>读未提交</li>
+<li>读已提交</li>
+<li>可重复读</li>
+<li>串行化</li>
+</ol>
+<p>在这些隔离级别中，会出现如下三个隔离问题：</p>
+<ol>
+<li>脏读。即一个事务读取到了另一个事务还未提交的数据。</li>
+<li>不可重复读，即在同一个事务中读取同一个数据，前后读取的数据不一致。一般是一个事务读取到了另一个事务修改的数据。</li>
+<li>虚幻读，即在同一个事务中读取同一个数据，前后读取的数据不一致。一般是一个事务读取到了另一个事务插入或删除的数据。</li>
+</ol>
+<p>四个隔离级别在处理三个隔离问题的能力如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>虚幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交（read uncommitted）</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>读已提交（read committed）</td>
+<td>X</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>可重复读（repeatable read）</td>
+<td>X</td>
+<td>X</td>
+<td>√</td>
+</tr>
+<tr>
+<td>串行化（serializable）</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody></table>
+<p>在MySQL中，默认的隔离级别是可重复读。MySQL通过自身解决了部分虚幻读的问题，但并没有完全解决。</p>
+<p>串行化虽然安全级别最高，但是此时数据库完全丧失了多线程的能力，在一个事务操作期间，其他事务都会变成阻塞状态，数据库的效率会因此下降。</p>
+<p>在JDBC中，开启事务的API如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//  开启事务</span><br>connection.setAutoCommit(<span class="hljs-literal">false</span>);<br><br><span class="hljs-comment">// 提交事务</span><br>connection.commit();<br><br><span class="hljs-comment">// 回滚事务</span><br>connection.rollback();<br></code></pre></td></tr></table></figure>
+
+<h2 id="Datasource"><a href="#Datasource" class="headerlink" title="Datasource"></a>Datasource</h2><p>Datasource具体指的是数据库连接池。数据库连接池是利用池化的思想，把数据库连接存放在池中，在我们需要连接时，从池里获取连接；用完之后再放回池中，这样就避免了反复创建、销毁连接，提高程序的效率。</p>
+<p>目前使用的第三方数据库连接池有三个：DBCP、c3p0、Druid。</p>
+<p>DBCP：需要使用properties配置文件配置。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">username</span>=<span class="hljs-string">root</span><br><span class="hljs-attr">password</span>=<span class="hljs-string">123456</span><br><span class="hljs-attr">url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/40th</span><br><span class="hljs-attr">driverClassName</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-attr">connectionProperties</span>=<span class="hljs-string">useSSL=false;characterEncoding=utf8</span><br><span class="hljs-attr">initialSize</span>=<span class="hljs-string">10</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 加载配置文件</span><br><span class="hljs-type">Properties</span> <span class="hljs-variable">properties</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Properties</span>();<br>properties.load(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;dbcp.properties&quot;</span>));<br><br><span class="hljs-comment">// 获取连接</span><br><span class="hljs-type">DataSource</span> <span class="hljs-variable">dataSource</span> <span class="hljs-operator">=</span> BasicDataSourceFactory.createDataSource(properties);<br><span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> dataSource.getConnection();<br></code></pre></td></tr></table></figure>
+
+<p>c3p0：需要使用xml文件配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">c3p0-config</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">default-config</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driverClass&quot;</span>&gt;</span>com.mysql.jdbc.Driver<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 在xml文件中，有一些特殊字符会有歧义，会报错，这些字符需要写转义字符  &amp; &gt; &lt;</span><br><span class="hljs-comment">                转义字符</span><br><span class="hljs-comment">        &amp;       &amp;amp;</span><br><span class="hljs-comment">        &lt;       &amp;lt;</span><br><span class="hljs-comment">        &gt;       &amp;gt;</span><br><span class="hljs-comment">        --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;jdbcUrl&quot;</span>&gt;</span>jdbc:mysql://localhost:3306/40th?useSSL=false<span class="hljs-symbol">&amp;amp;</span>characterEncoding=utf8<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;user&quot;</span>&gt;</span>root<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span>&gt;</span>123456<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;initialPoolSize&quot;</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;maxIdleTime&quot;</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;maxPoolSize&quot;</span>&gt;</span>100<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;minPoolSize&quot;</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;maxStatements&quot;</span>&gt;</span>200<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">default-config</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">c3p0-config</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>使用方式同DBCP，只是dataSource改为c3p0的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">dataSource = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ComboPooledDataSource</span>();<br></code></pre></td></tr></table></figure>
+
+<p>Druid：需要使用properties配置文件配置。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">username</span>=<span class="hljs-string">root</span><br><span class="hljs-attr">password</span>=<span class="hljs-string">123456</span><br><span class="hljs-attr">url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/40th?useSSL=false&amp;characterEncoding=utf8</span><br><span class="hljs-attr">driverClassName</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br></code></pre></td></tr></table></figure>
+
+<p>使用方式同DBCP，只是dataSource改为Druid的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">dataSource = DruidDataSourceFactory.createDataSource(properties);<br></code></pre></td></tr></table></figure>
+
+<h2 id="DBUtils"><a href="#DBUtils" class="headerlink" title="DBUtils"></a>DBUtils</h2><p>DBUtils是一个可以帮助提高JDBC开发效率的框架。主要使用下面三个类。</p>
+<p>DBUtils：可以关闭连接、提交事务等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 关闭连接</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(Connection conn)</span> <span class="hljs-keyword">throws</span> SQLException;<br><br><span class="hljs-comment">// 关闭ResultSet</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(ResultSet rs)</span> <span class="hljs-keyword">throws</span> SQLException;<br><br><span class="hljs-comment">// 关闭statement</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(Statement stmt)</span> <span class="hljs-keyword">throws</span> SQLException;<br><br><span class="hljs-comment">// 提交并且关闭</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">commitAndClose</span><span class="hljs-params">(Connection conn)</span> <span class="hljs-keyword">throws</span> SQLException;<br></code></pre></td></tr></table></figure>
+
+<p>QueryRunner：可以执行SQL语句并获取结果集。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 构造无参的queryRunner</span><br><span class="hljs-type">QueryRunner</span> <span class="hljs-variable">queryRunner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryRunner</span>();<br><span class="hljs-comment">// 构造QueryRunner</span><br><span class="hljs-type">DataSource</span> <span class="hljs-variable">dataSource</span> <span class="hljs-operator">=</span> DruidUtils.getDataSource();<br><span class="hljs-type">QueryRunner</span> <span class="hljs-variable">queryRunner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryRunner</span>(dataSource);<br><br><span class="hljs-comment">// 获取增删改影响的行数</span><br><span class="hljs-type">int</span> <span class="hljs-variable">affectedRows</span> <span class="hljs-operator">=</span> queryRunner.update(<span class="hljs-string">&quot;update stu set name = ? where id = ?&quot;</span>, <span class="hljs-string">&quot;嘉靖皇帝&quot;</span>, <span class="hljs-number">4</span>);<br></code></pre></td></tr></table></figure>
+
+<p>ResultSetHandler：可以帮助解析结果集，但本身是接口，实际用的是以下的具体实现。</p>
+<pre><code class="java">// BeanHandler，把结果集中的第一行数据转化为一个JavaBean
+Stu stu = queryRunner.query(&quot;select id,name,age,class as clazz from stu where id = ?&quot;,new BeanHandler&lt;&gt;(Stu.class),2);
+
+// BeanListHandler，把结果集对象解析为一个 BeanList
+List&lt;Stu&gt; stuList = queryRunner.query(&quot;select id,name,age,class as clazz from stu&quot;,new BeanListHandler&lt;&gt;(Stu.class));
+
+// MapHandler，把结果集中的第一行记录解析为一个Map
+Map&lt;String, Object&gt; map = queryRunner.query(&quot;select * from stu&quot;, new MapHandler());
+
+// MapListHandler，把结果集中的记录 映射到一个 List&lt;map&lt;String,Object&gt;&gt; 对象中
+List&lt;Map&lt;String, Object&gt;&gt; mapList = queryRunner.query(&quot;select * from  stu&quot;, new MapListHandler());
+
+// ColumnListHandler，用来接收单列值的解析结果。
+List&lt;Object&gt; list = queryRunner.query(&quot;select name from student&quot;, new ColumnListHandler&lt;&gt;());
+
+// ScalarHandler，用来处理查询结果是单个值的情况。
+Long count = queryRunner.query(&quot;select count(*) from student&quot;, new ScalarHandler&lt;Long&gt;());
+</code></pre>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/05/16/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;16&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;16&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/SQL/" rel="tag">SQL</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">关系型数据库与非关系型数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">SQL语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">数据完整性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">三大范式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.</span> <span class="toc-text">多表查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC"><span class="toc-number">6.</span> <span class="toc-text">JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">数据库注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text">批处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">9.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datasource"><span class="toc-number">10.</span> <span class="toc-text">Datasource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DBUtils"><span class="toc-number">11.</span> <span class="toc-text">DBUtils</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1653919078869"></script>
+
+
+	<script async src="/js/search.js?v=1653919078869"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

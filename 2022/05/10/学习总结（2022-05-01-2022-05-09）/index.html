@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.05.01-2022.05.09） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="HTMLHTML是一个用标签描述的文本语言。 HTML初始格式为： 12345678910&lt;!DOCTYPE html&gt;   语法声明: 声明使用HTML5语法&lt;html&gt;    &lt;head&gt;        &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;  meta: 描述网页的元信息        &lt;title&gt;Tit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.05.01-2022.05.09）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/05/10/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="HTMLHTML是一个用标签描述的文本语言。 HTML初始格式为： 12345678910&lt;!DOCTYPE html&gt;   语法声明: 声明使用HTML5语法&lt;html&gt;    &lt;head&gt;        &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;  meta: 描述网页的元信息        &lt;title&gt;Tit">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-10T14:17:02.000Z">
+<meta property="article:modified_time" content="2022-05-23T12:26:18.820Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1653919078888">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1653919078888">
+    <link rel="stylesheet" href="/css/style.css?v=1653919078888">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <!--动态线条背景-->
+    <script type="text/javascript"
+    color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>36</div>
+        <div><span>标签</span>7</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">35</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">36</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/26/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-24-2022-05-26%EF%BC%89/">学习总结（2022.05.24-2022.05.26）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/">学习总结（2022.05.17-2022.05.23）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/16/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89/">学习总结（2022.05.10-2022.05.16）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89/">学习总结（2022.05.01-2022.05.09）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/04/Hexo%E7%BE%8E%E5%8C%96%E8%AE%B0%E5%BD%95/">Hexo美化记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="学习总结（2022.05.01-2022.05.09）" loading="lazy">
+              <h1>学习总结（2022.05.01-2022.05.09）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月10日</a>
+</div>
+
+      <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>HTML是一个用标签描述的文本语言。</p>
+<p>HTML初始格式为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>   语法声明: 声明使用HTML5语法<br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>  meta: 描述网页的元信息<br>        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>重要标签（了解即可）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span> : 横线标签, 单标签<br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span> : 换行标签, 单标签<br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h5</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h6</span>&gt;</span> : 标题标签, 双标签<br><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span> : 分区或者节给一个页面, 双标签<br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span> : 段落标签, 双标签<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span>&gt;</span> : 超链接标签, 双标签<br><span class="hljs-tag">&lt;<span class="hljs-name">img</span>&gt;</span> : 图片标签, 单标签<br><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span>: 有序列表, 和<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>标签共同构成一套标签<br><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>: 无序列表, 和<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>标签共同构成一套标签<br><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>: 表格标签, 定义一个表格 (和tr, td, th ...构成成套标签)<br>	<span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span> : 一个表格中的一行<br>	<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span> : 一行中的一个单元格<br></code></pre></td></tr></table></figure>
+
+<p>表单元素：表单元素会根据元素内的内容生成一个url，对后端发起请求，并根据请求获得内容。生成的url中分为非参数部分和参数部分，例子如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html">https://s.taobao.com/search?q=鞋子<br>             非参数         | 参数 <br></code></pre></td></tr></table></figure>
+
+<p>非参数部分由表单元素的action属性提供，参数则由表单元素的其他属性提供。</p>
+<p>表单元素中有一个method属性，它决定了表单元素在提交表单时使用的HTTP方法：GET&#x2F;POST。GET一般用于获取数据，POST一般用于提交数据；GET请求一般把请求参数直接拼接在url之后，POST请求一般把参数放在传输的正文中；GET请求不安全（可以被用户直接观察到），POST请求安全。</p>
+<p>表单元素根据自身的name属性和value属性生成一个键值对数据，通过传输该数据完成与后端的交互。</p>
+<p>常见表单元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span>&gt;</span> : 单标签, 表示一个输入框<br><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span>&gt;</span> : 多行文本, 相当于一个可以输入多行内容的input<br><span class="hljs-tag">&lt;<span class="hljs-name">select</span>&gt;</span> : 下拉选择, 和<span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span> 是一套标签<br></code></pre></td></tr></table></figure>
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>CSS主要用于对HTML的文本、图片和版面的布局等显示样式。</p>
+<p>CSS通过选择器将HTML代码和CSS代码关联。选择器的类型有标签选择器&#x2F;类选择器&#x2F;id选择器。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br>		<span class="hljs-comment">/* 标签选择器 */</span><br>        <span class="hljs-selector-tag">div</span>&#123;<br>            <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">background</span>: red;<br>		&#125;<br>         <span class="hljs-comment">/* 类选择器 */</span><br>        <span class="hljs-selector-class">.div1</span>&#123;<br>            <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">background</span>: red;<br>            <span class="hljs-attribute">color</span>: white;<br>            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">30px</span>;<br>        &#125;<br>		<span class="hljs-comment">/* id选择器 */</span><br>        <span class="hljs-selector-id">#div2</span>&#123;<br>            <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>            <span class="hljs-attribute">background</span>: <span class="hljs-number">#c9ffe3</span>;<br>        &#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p>选择器的优先级是id选择器 &gt; 类选择器 &gt; 标签选择器。如果存在两个同优先级选择器，优先选择较近的选择器（本质是HTML的解析模式为从上到下解析）。</p>
+<p>盒子模型：一个HTML标签在页面上占据的空间。这个空间分为四个结构：元素内容区域、内边距区域(padding)、边框区域(border)、外边距区域(margin)。盒子模型的作用是使布局模块化，方便整个布局和个体布局的设计。根据盒子模型种类的不同，可以将标签元素分为三种：</p>
+<ol>
+<li>块级元素：独占一行，从上到下排布；可以直接控制宽高&#x2F;内外边距，一般用于大布局的搭建。如：div、p、form、table</li>
+<li>行级元素：不独占一行，与其他行级元素从左到右一行显示；只能控制内外边距，宽高受本身内容大小控制；一般用于小结构的搭建。如：span、a、br</li>
+<li>行内块：本质属于行级元素，但是可以设置宽高。如：input、img、select</li>
+</ol>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JS是一种轻量级、弱类型的语言，主要用于在HTML中添加交互行为。</p>
+<p>JS的引入方式有两种。一种是直接在HTML中的script标签内部引入，一种是在script标签的src属性中导入外部的JS文件。</p>
+<p>类型：统一用var声明，数据类型由赋值类型决定。数据类型一般有：Number，String，Array</p>
+<p>函数：使用function声明。</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p>DOM全称为文档对象模型，是一种将HTML文档视为树结构的理论，这种树结构也被称为DOM树。</p>
+<p>DOM树的节点拥有层级关系，从顶端的文档节点开始，依次往下是：</p>
+<ol>
+<li>由HTML元素构成的元素节点</li>
+<li>HTML属性构成的属性节点</li>
+<li>HTML元素内文本构成的文本节点</li>
+</ol>
+<p>根据DOM理论，可以知道一个HTML文件的加载顺序：</p>
+<ol>
+<li>解析HTML结构，构建DOM树</li>
+<li>加载外部脚本(JS)和样式表文件(CSS)</li>
+<li>解析并执行脚本代码</li>
+<li>构造DOM模型，完成后根据DOM树显示页面。</li>
+</ol>
+<p>JS中与DOM相关的操作有：</p>
+<ol>
+<li><p>获取节点：</p>
+<p>document.getElementById()<br>document.getElementsByName()<br>document.getElementsByTagName()</p>
+</li>
+<li><p>添加节点：</p>
+<p>document.appendChild()</p>
+</li>
+<li><p>删除节点：</p>
+<p>document.removeChild()</p>
+</li>
+<li><p>替换节点：</p>
+<p>document.replaceChild()</p>
+</li>
+</ol>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/05/10/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;10&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;10&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">1.</span> <span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS"><span class="toc-number">2.</span> <span class="toc-text">CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript"><span class="toc-number">3.</span> <span class="toc-text">JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM"><span class="toc-number">4.</span> <span class="toc-text">DOM</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1653919078892"></script>
+
+
+	<script async src="/js/search.js?v=1653919078892"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>

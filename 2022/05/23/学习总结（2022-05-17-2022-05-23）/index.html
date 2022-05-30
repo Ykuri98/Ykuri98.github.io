@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.05.17-2022.05.23） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="索引索引是一种帮助提高查询速度的数据结构，可以提高MySQL的查询语句的效率。 索引的数据结构的选择有两个指标：单值查询和范围查询。各个数据结构的查询效率如下：  数组：单值查询慢，范围查询慢。 链表：单值查询慢，范围查询慢。 二叉树：单值查询较慢，范围查询慢。 B树：单值查询较快，范围查询慢。 B+树：单值查询较快，范围查询较快（MySQL官方推荐数据结构） Hash表：单值查询快，范围查询慢（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.05.17-2022.05.23）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="索引索引是一种帮助提高查询速度的数据结构，可以提高MySQL的查询语句的效率。 索引的数据结构的选择有两个指标：单值查询和范围查询。各个数据结构的查询效率如下：  数组：单值查询慢，范围查询慢。 链表：单值查询慢，范围查询慢。 二叉树：单值查询较慢，范围查询慢。 B树：单值查询较快，范围查询慢。 B+树：单值查询较快，范围查询较快（MySQL官方推荐数据结构） Hash表：单值查询快，范围查询慢（">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-23T12:25:39.000Z">
+<meta property="article:modified_time" content="2022-05-26T09:50:13.575Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1653919078788">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1653919078788">
+    <link rel="stylesheet" href="/css/style.css?v=1653919078788">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <!--动态线条背景-->
+    <script type="text/javascript"
+    color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>36</div>
+        <div><span>标签</span>7</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">35</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">36</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/26/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-24-2022-05-26%EF%BC%89/">学习总结（2022.05.24-2022.05.26）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/">学习总结（2022.05.17-2022.05.23）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/16/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-10-2022-05-16%EF%BC%89/">学习总结（2022.05.10-2022.05.16）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-01-2022-05-09%EF%BC%89/">学习总结（2022.05.01-2022.05.09）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/04/Hexo%E7%BE%8E%E5%8C%96%E8%AE%B0%E5%BD%95/">Hexo美化记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="学习总结（2022.05.17-2022.05.23）" loading="lazy">
+              <h1>学习总结（2022.05.17-2022.05.23）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月23日</a>
+</div>
+
+      <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引是一种帮助提高查询速度的数据结构，可以提高MySQL的查询语句的效率。</p>
+<p>索引的数据结构的选择有两个指标：单值查询和范围查询。各个数据结构的查询效率如下：</p>
+<ol>
+<li>数组：单值查询慢，范围查询慢。</li>
+<li>链表：单值查询慢，范围查询慢。</li>
+<li>二叉树：单值查询较慢，范围查询慢。</li>
+<li>B树：单值查询较快，范围查询慢。</li>
+<li>B+树：单值查询较快，范围查询较快（MySQL官方推荐数据结构）</li>
+<li>Hash表：单值查询快，范围查询慢（MySQL内部使用，不开放给用户）</li>
+</ol>
+<p>B+树是对B树的一种优化。叶子节点之间维护一个指针，方便了范围查找；所有非叶子节点会在叶子节点中冗余一份，并且自身不再存储数据，而只存储key值，这样就降低了树的高度。</p>
+<p>为什么要降低树的高度？因为数据库读取数据时是按树的层序读取，而每一次读取都要经历一次磁盘IO，所以树的高度越低，磁盘IO的次数越少，效率越高。</p>
+<p>为什么MySQL使用主键自增策略？因为无序的插入索引会导致树的结构发生较多较大的变化，而改变结构是要消耗时间的。在主键自增的策略下，每次新建的数据的主键索引就永远插入到索引树的右侧，这样就能保证树的结构不会发生较大的改变。</p>
+<p>索引是不是声明的越多越好？首先，声明索引需要建立索引树，需要占用空间；其次，每次对数据的增删改都会影响索引树的结构，如果索引树太多势必会导致维护这些索引树的代价提升。所以索引并不是越多越好。</p>
+<h2 id="数据库的组成结构"><a href="#数据库的组成结构" class="headerlink" title="数据库的组成结构"></a>数据库的组成结构</h2><p>连接器：校验用户名和密码，和客户端建立连接。</p>
+<p>分析器：进行语法分析，编译SQL语句。</p>
+<p>优化器：优化SQL语句的性能，主要操作为</p>
+<ol>
+<li>选择哪个索引进行查询。</li>
+<li>多表查询时，选择表连接的顺序。</li>
+</ol>
+<p>执行器：执行SQL语句编译后的指令。</p>
+<p>存储引擎：存储数据。</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p>目前MySQL使用的引擎有MyISAM和InnoDB。</p>
+<p>MyISAM：MyISAM有三种文件，分别是表结构定义文件、数据文件和索引文件。因为它的数据和索引是分开存储的，所以MyISAM的索引叫非聚集索引。索引分为两种类型：主键索引和非主键索引，根据索引树是否是由主键生成来区分。在MyISAM中：</p>
+<ol>
+<li>主键索引的key值为主键值，data为数据对应的地址值。</li>
+<li>非主键索引的key值为指定的队列值，data也为数据对应的地址值。</li>
+</ol>
+<p>InnoDB：InnoDB有两种文件。分别是表结构定义文件、数据&#x2F;索引文件。因为它的数据和索引放在一个文件中，所以InnoDB的索引叫聚集索引。在InnoDB中：</p>
+<ol>
+<li>主键索引的key值为主键值，data为主键对应的数据。不同于MyISAM存储的是数据的地址，因为InnoDB存储的是数据本身，这就要求InnoDB必须有一列主键，否则就无法构建索引树。如果用户建表时不声明主键，那么InnoDB会维护一个隐藏列作为主键。MySQL推荐自定义主键的原因就是如果我们不声明主键，我们也无法通过隐藏的索引列来进行查询，这就浪费了主键索引的性能。</li>
+<li>非主键索引的key值为指定的队列值，data为数据对应的主键值。</li>
+</ol>
+<p>MyISAM与InnoDB的区别：</p>
+<ol>
+<li>InnoDB支持事务，MyISAM不支持事务。</li>
+<li>InnoDB支持外键，MyISAM不支持外键。</li>
+<li>InnoDB支持表锁和行锁，MyISAM只支持表锁。</li>
+</ol>
+<p>那么什么情况下使用MyISAM？因为MyISAM不支持事务，且只支持表锁，会导致增删改查的效率下降，并有发生隔离问题的可能，所以一般存储不需要更改的数据，比如历史数据。</p>
+<h2 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询索引</span><br><span class="hljs-keyword">show</span> index <span class="hljs-keyword">from</span> tableName;<br><br><span class="hljs-comment">-- 建立索引</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> tableName(<br>	id <span class="hljs-type">int</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>	index idx_name(name) <span class="hljs-keyword">using</span> BTREE<br>)ENGINE<span class="hljs-operator">=</span>InnoDB <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> utf8;<br><br><span class="hljs-comment">-- 查看索引</span><br><span class="hljs-keyword">show</span> index <span class="hljs-keyword">from</span> tableName;<br><br><span class="hljs-comment">-- 删除索引</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName <span class="hljs-keyword">drop</span> index idx_name;<br><br><span class="hljs-comment">-- 添加索引</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> tableName <span class="hljs-keyword">add</span> index idx_name;<br></code></pre></td></tr></table></figure>
+
+<h2 id="回表"><a href="#回表" class="headerlink" title="回表"></a>回表</h2><p>回表是指在一次查询中，需要根据非主键索引查询出主键值，再根据主键值在主键索引中找到数据，这样就查询了两条索引树，导致查询的效率变低了。</p>
+<p>如何避免回表？主要的方式有：</p>
+<ol>
+<li>尽量使用主键查询。因为只有使用非主键索引才会发生回表。</li>
+<li>尽量避免使用<code>select * from</code>。因为如果准确列出列名，且列名中包含非主键索引，那么该列的值会直接使用非主键索引中的值，而非去使用获得主键，并在主键索引树查询得到的值。</li>
+<li>可以考虑使用联合索引。这样可以降低非主键索引树的高度，能更快的查到主键值。</li>
+</ol>
+<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><p>Maven是一个项目管理工具，主要功能是编译项目、将项目打包为jar包、依赖管理。</p>
+<p>Maven有以下指令：</p>
+<ul>
+<li>clean：删除编译好的项目文件夹target。</li>
+<li>validate：验证项目中文件的合法性和权限。</li>
+<li>compile：编译项目，生成target文件夹。</li>
+<li>test：可以运行test包下的所有测试方法。</li>
+<li>package：将项目打包成.jar或.war。</li>
+<li>verify：验证打包是否有效且合法。</li>
+<li>install：可以将打包生成的jar包复制到本地仓库中。</li>
+<li>site：建立远程站点。</li>
+<li>deploy：把本地仓库传输到远端部署。</li>
+</ul>
+<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><p>scope作用域：在导入依赖时，可以对依赖所影响的作用域进行限制，使用<scope>标签即可。</p>
+<p>作用域有以下几种：</p>
+<ul>
+<li>test：仅在test包下有效，在main包下无效。</li>
+<li>provide：在编译时生效，在运行时失效。主要用于对依赖的版本控制，如对旧依赖使用provide作用域。</li>
+<li>runtime：在编译时失效，在运行时生效。主要用于面向接口编程时对编程的规范，如JDBC，在使用JDBC的方法时，由于编译时使用的是java自带的接口，运行时才使用导入的驱动包中的实现类，所以此时编译并不会报错，且可以正常运行。</li>
+<li>compile：默认作用域，作用于全局。</li>
+</ul>
+<p>依赖传递：依赖具有传递性。如A依赖引入了B依赖，B依赖引入了C依赖，那么A依赖就一定也会引入C依赖。</p>
+<p>依赖冲突：在同一个项目中，导入同一依赖的不同版本，就会发生冲突。冲突的解决方法有：</p>
+<ol>
+<li>声明优先原则：指同一依赖的不同版本中，谁先在pom.xml声明，就优先使用谁。</li>
+<li>就近原则：指在依赖传递时，谁传递的次数比较少，就优先使用谁。就近原则的优先级高于声明优先原则。</li>
+<li>手动排除。</li>
+<li>提取常量。在pom.xml顶部事先提取依赖版本，这样就可以避免依赖冲突。</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span><br>		<span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">			1. 提取了常量之后，可以避免依赖冲突的问题</span><br><span class="hljs-comment">			2. 提取了常量之后，可以方便我们后期管理这些依赖（查看版本，更换版本）</span><br><span class="hljs-comment">		--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">spring.version</span>&gt;</span>5.3.3<span class="hljs-tag">&lt;/<span class="hljs-name">spring.version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Junit"><a href="#Junit" class="headerlink" title="Junit"></a>Junit</h2><p>Junit是一种测试工具，可以运行指定的方法。</p>
+<p>Junit有以下五种注解：</p>
+<ol>
+<li>@Test：单元测试。修饰的方法必须是public void，必须没有参数。</li>
+<li>@After：在测试执行后执行。</li>
+<li>@Before：在测试执行前执行。</li>
+<li>@AfterClass：在测试类类加载前执行。</li>
+<li>@BeforeClass：在测试类中的全部方法执行完毕后执行。</li>
+</ol>
+<p>其中，@AfterClass、@BeforeClass必须修饰静态方法。</p>
+<p>测试类必须放在test包下。</p>
+<p>测试类一般命名为XxxTest，测试方法一般命名为testXxx。</p>
+<h2 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h2><p>Mybatis是一种ORM框架。ORM意为对象关系映射，即是将SQL中的数据转化为Java对象，或是将Java对象转化为SQL记录。Mybatis可以帮我们在Java中更高效的操作数据库。</p>
+<p>Mybatis需要一个主配置文件，用于获取SqlSessionFactory。SqlSessionFactory时一个工厂，用于生产SqlSession实例对象。SqlSession是一种Mybatis框架与数据库的连接，里面封装了Connection对象。</p>
+<p>配置文件样例如下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <br>    <span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span><br>    	<span class="hljs-comment">&lt;!--  添加日志的配置 --&gt;</span><br>    	<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;logImpl&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;STDOUT_LOGGING&quot;</span>/&gt;</span><br><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 环境的配置，其实就是去配置数据库连接--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/40th?useSSL=false<span class="hljs-symbol">&amp;amp;</span>characterEncoding=utf8&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;root&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;123456&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--&lt;mapper resource=&quot;org/mybatis/example/BlogMapper.xml&quot;/&gt;--&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中<mappers>标签用于放置SQL语句的配置文件，一般命名为XxxMapper.xml，并放置于Maven项目中的src&#x2F;main&#x2F;resources文件下，且要与src&#x2F;main&#x2F;java中的Mapper接口在相同的路径下。</p>
+<p>Mapper配置文件样例如下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span></span><br><span class="hljs-meta">        <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="hljs-comment">&lt;!-- mapper.xml 映射文件中的标签没有顺序要求 --&gt;</span><br><br><br><span class="hljs-comment">&lt;!-- namespace: 命名空间，需要唯一 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;cskaoyan&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!--&lt;insert id=&quot;&quot;--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;delete id=&quot;&quot;--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;update id=&quot;&quot;--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;select id=&quot;&quot;/&gt;--&gt;</span><br><br>    <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">        后续如何找到这个标签中的SQL语句呢？</span><br><span class="hljs-comment">        namespace.id = 这个SQL语句的坐标</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        id: 指这个SQL语句的位置，每一个标签的id不能重复</span><br><span class="hljs-comment">        resultType：结果的类型</span><br><span class="hljs-comment">    --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectAccountById&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.Account&quot;</span>&gt;</span><br>        select * from account where id = #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectAccountList&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.Account&quot;</span>&gt;</span><br>        select * from account<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>Mybatis的动态代理功能可以根据Mapper配置文件和由用户制定的Mapper接口，自动生成接口的代理对象，但是对Mapper接口有如下要求：</p>
+<ol>
+<li>接口的全限定名需与Mapper.xml下的<namespace>标签中的值保持一致。</li>
+<li>接口的方法要与Mapper.xml下的 <select> <insert> <update> <delete> 标签 一一对应，并且方法名要和标签的id值保持一致。</li>
+<li>方法的返回类型必须与标签中的resultType保持一致。</li>
+<li>接口文件名和配置文件名需保持一致，且配置文件在resources文件夹下的相对路径要与接口文件在java文件夹下的相对路径一致。</li>
+</ol>
+<p>Mybatis的使用样例如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br><br>    <span class="hljs-comment">// 目的：要去执行sql语句</span><br><br>    <span class="hljs-comment">// 1. 读取配置文件</span><br>    <span class="hljs-type">InputStream</span> <span class="hljs-variable">stream</span> <span class="hljs-operator">=</span> Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>);<br><br><br>    <span class="hljs-comment">// 2. 获取SqlSessionFactory</span><br>    <span class="hljs-type">SqlSessionFactory</span> <span class="hljs-variable">sqlSessionFactory</span> <span class="hljs-operator">=</span> sqlSessionFactoryBuilder.build(stream);<br><br><br>    <span class="hljs-comment">// 3. 执行SQL语句,其中true表示自动提交事务</span><br>    <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> sqlSessionFactory.openSession(<span class="hljs-literal">true</span>);<br><br>    <span class="hljs-comment">// 获取代理对象</span><br>	<span class="hljs-type">StudentMapper</span> <span class="hljs-variable">studentMapper</span> <span class="hljs-operator">=</span> sqlSession.getMapper(StudentMapper.class);<br><br>	<span class="hljs-comment">// 找到对应给的SQL语句，并且执行</span><br>	<span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> studentMapper.selectNameById(<span class="hljs-number">1</span>);<br><br>    System.out.println(name);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h3><p>在Mapper接口中的参数需要映射至Mapper配置文件中，需要遵守一些规则。</p>
+<ol>
+<li>传入的参数在Mapper中需要使用<code>#&#123;XXX&#125;</code>来取值。</li>
+<li>如果在Mapper接口中对参数进行了<code>@Param</code>注解修饰别名，那么在Mapper配置文件中必须使用该别名。</li>
+<li>如果Mapper接口中传入的是对象，那么在Mapper配置文件中必须使用<code>#&#123;成员变量名&#125;</code>来取值。如果对象有注解，可以通过<code>#&#123;注解值.成员变量名&#125;</code>来取值。</li>
+</ol>
+<p>传值时可以使用#{}和${}两种不同的传值方式，其中#{}表示是预编译占位，${}表示是字符串拼接。一般而言，我们都使用#{}传值，但是如果我们需要对SQL语句传入表名和列名时，则需要使用${}。</p>
+<h3 id="输出映射"><a href="#输出映射" class="headerlink" title="输出映射"></a>输出映射</h3><p>在Mapper配置文件中执行SQL语句后的结果会转换为一个Java对象，转换时也需要遵守一些规则。</p>
+<ol>
+<li>映射的类型由Mapper配置文件中SQL语句标签里的resultType或resultMap指定，且Mapper接口中的返回类型要与其一致。</li>
+<li>如果返回有多个值，在Mapper接口中需定义数组或集合，但是resultType只需要指定单个元素的类型即可。</li>
+<li>如果返回的有多个列，那么需要在java文件中定义一个JavaBean对象来作为返回类型。此时Mybatis会把对象中的成员变量名和查询结果的列名一一映射，如果原始表中的列名与成员变量名不一致，可以通过@Param取别名，或者是resultMap来解决。在声明JavaBean对象的成员变量时，尽量使用包装类型，方便寻找错误。</li>
+</ol>
+<p>resultMap一般用于对SQL的查询结果进行再次映射，一般用于修改原始表列名和多表查询。resultMap的使用样例如下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;studentMap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.Student&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">        id:映射主键值的标签</span><br><span class="hljs-comment">        column: 列名</span><br><span class="hljs-comment">        property: 成员变量名</span><br><span class="hljs-comment">        result: 映射普通列的</span><br><span class="hljs-comment">    --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;name&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;age&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;gender&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;gender&quot;</span>/&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">resultMap</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectStudentByIdWithResultMap&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;studentMap&quot;</span>&gt;</span><br>    select id,name,age,gender from student where id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h3><p>Mybatis可以根据传入的条件，动态的改变SQL语句。</p>
+<p><where>：可以自动拼接where关键字，并去除相邻的and或or关键字；如果where中没有SQL片段需要拼接，<where>不会拼接where关键字。</p>
+<p><if>：可以判断传入的参数是否符合条件。需要注意的是，判断中的大于号和小于号为了避免与xml文件中的标签符号冲突，需要写为<code>&amp;gt;</code>和<code>&amp;lt;</code>。</p>
+<p><sql>和<include>：<sql>可以提取公共的SQL语句，<include>负责引入<sql>中的内容。为了保证SQL语句的可读性，并不会滥用这两个标签，它们一般用于提取列名。</p>
+<p><set>：可以自动拼接set关键字，并去除标签中的最后一个<code>,</code>。</p>
+<p><foreach>：可以在SQL中循环取值。一般用于in查询。例子如下。</p>
+<p>Mapper.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// in 查询</span><br>List&lt;User&gt; <span class="hljs-title function_">selectUserListByIds</span><span class="hljs-params">(List&lt;Integer&gt; ids)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>Mapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectUserListByIds&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.User&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- select * from user where id in (?,?,?,?,?,?,?)--&gt;</span><br><br>    select <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">refid</span>=<span class="hljs-string">&quot;all_column&quot;</span>/&gt;</span><br>    from user where id in<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;collection&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span> <span class="hljs-attr">open</span>=<span class="hljs-string">&quot;(&quot;</span> <span class="hljs-attr">close</span>=<span class="hljs-string">&quot;)&quot;</span>&gt;</span><br>        #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><p>多表查询的方式分为分次查询和连接查询。</p>
+<p>首先在建立JavaBean对象时，需要在直接查询的A表所映射的对象中放入B表所映射的对象的成员变量。</p>
+<p>分次查询：在Mybatis中，一个SQL语句标签只能执行一句SQL语句，分次查询即是使用resultMap来连接两个SQL语句，用一个SQL语句的结果作为另一个SQL语句的传入值。</p>
+<p>分次查询的样例如下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 分次查询 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectUserByName&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;userMap&quot;</span>&gt;</span><br>    select id,username,nickname,gender,age<br>    from user<br>    where username = #&#123;name&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userMap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.User&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;username&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;nickname&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;nickname&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;gender&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;gender&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;age&quot;</span>/&gt;</span><br><br>    <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">        association：关联单个bean的时候，使用</span><br><span class="hljs-comment">        property：成员变量的名字</span><br><span class="hljs-comment">        javaType: 成员变量的类型</span><br><span class="hljs-comment">        select：关联的第二次查询的SQL语句的坐标，第二次查询和第一次查询在同一个文件中的时候，namespace可以省略</span><br><span class="hljs-comment">        column: 给第二次查询传递的值的列名</span><br><span class="hljs-comment">    --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">association</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;userDetail&quot;</span></span><br><span class="hljs-tag">                 <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.UserDetail&quot;</span></span><br><span class="hljs-tag">                 <span class="hljs-attr">select</span>=<span class="hljs-string">&quot;com.cskaoyan.mapper.UserDetailMapper.selectUserDetailById&quot;</span></span><br><span class="hljs-tag">                 <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;id&quot;</span>/&gt;</span><br>    <br>    <br>   <span class="hljs-comment">&lt;!-- 第二次查询 --&gt;</span>  <br> 	<span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectUserDetailById&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.UserDetail&quot;</span>&gt;</span><br>        select id,user_id as userId,height,weight,pic from user_detail where user_id = #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>连接查询：连接查询即是利用inner join和resultMap来连接表。</p>
+<p>连接查询的样例如下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 连接查询 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectUserByNameUseCrossQuery&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;userCrossMap&quot;</span>&gt;</span><br>    SELECT<br>            user.id,<br>            user.username,<br>            user.nickname,<br>            user.gender,<br>            user.age,<br>            user_detail.id as uid,<br>            user_detail.user_id as userId,<br>            user_detail.weight as weight,<br>            user_detail.height as height,<br>            user_detail.pic as pic<br>    FROM<br>            user left JOIN user_detail ON user.id = user_detail.user_id<br>    WHERE<br>            user.username = #&#123;name&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;userCrossMap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.User&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 映射 user--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;username&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;nickname&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;nickname&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;gender&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;gender&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;age&quot;</span>/&gt;</span><br><br><br>    <span class="hljs-comment">&lt;!-- 映射userDetail--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">association</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;userDetail&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;com.cskaoyan.bean.UserDetail&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;uid&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;userId&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;userId&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;weight&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;weight&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;height&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;height&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;pic&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;pic&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">association</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">resultMap</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="懒加载和缓存"><a href="#懒加载和缓存" class="headerlink" title="懒加载和缓存"></a>懒加载和缓存</h3><p>懒加载是指在Mybatis进行分次查询的时候，假如第二次查询的内容没有被使用到的话，那么就不去执行第二次查询的SQL语句，等到用到第二次查询的内容的时候再去执行第二条SQL语句。</p>
+<p>Mybatis的默认配置是关闭懒加载，要开启懒加载需要在Mybatis的配置文件中加入如下配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 懒加载 true: 表示开启  false:默认值，表示关闭 --&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lazyLoadingEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>缓存是指在Mybatis中，单独开辟一块内存空间（map），来存储查询的信息。后续假如再次调用了到了同样的查询，那么就直接查询缓存。</p>
+<p>缓存分为一级缓存和二级缓存。</p>
+<p>一级缓存是一个SqlSession级别的缓存。缓存的内容存储在SQLSession中。一级缓存是默认开启的，且无法关闭，只有在SqlSession关闭时，或者SqlSession调用commit方法会让一级缓存失效。</p>
+<p>二级缓存是一个NameSpace级别的缓存，每一个NameSpace都有自己的缓存空间。二级缓存是默认开启的。</p>
+<p>在实际工作中，Mybatis的缓存机制并不好用，主要是它无法解决脏数据的问题，且用户不能直接操作缓存，所以在实际工作中会使用Redis替代。</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;23&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;05&#x2F;23&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/SQL/" rel="tag">SQL</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">1.</span> <span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">数据库的组成结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">3.</span> <span class="toc-text">存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">回表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven"><span class="toc-number">6.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="toc-number">7.</span> <span class="toc-text">依赖管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit"><span class="toc-number">8.</span> <span class="toc-text">Junit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mybatis"><span class="toc-number">9.</span> <span class="toc-text">Mybatis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%98%A0%E5%B0%84"><span class="toc-number">9.1.</span> <span class="toc-text">输入映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%98%A0%E5%B0%84"><span class="toc-number">9.2.</span> <span class="toc-text">输出映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81SQL"><span class="toc-number">9.3.</span> <span class="toc-text">动态SQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">9.4.</span> <span class="toc-text">多表查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%87%92%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BC%93%E5%AD%98"><span class="toc-number">9.5.</span> <span class="toc-text">懒加载和缓存</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1653919078842"></script>
+
+
+	<script async src="/js/search.js?v=1653919078842"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>
