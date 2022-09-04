@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>学习总结（2022.07.04-2022.07.20） - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="NginxNginx是一个高性能的支持HTTP协议和反向代理的web服务器，其特点是占有内存少，并发能力强。 正向代理：代理服务器代理的是用户的客户端，访问的是服务端的服务器。 反向代理：代理服务器代理的是服务端的服务器，客户端访问的是被代理的服务器。 在微服务架构下，Nginx主要用于静态代理和负载均衡。 Nginx优点：  高并发，高性能 扩展性好 异步非阻塞的事件驱动模型 高可靠性  微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习总结（2022.07.04-2022.07.20）">
+<meta property="og:url" content="https://ykuri98.github.io/2022/07/07/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-07-04-2022-07-20%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="NginxNginx是一个高性能的支持HTTP协议和反向代理的web服务器，其特点是占有内存少，并发能力强。 正向代理：代理服务器代理的是用户的客户端，访问的是服务端的服务器。 反向代理：代理服务器代理的是服务端的服务器，客户端访问的是被代理的服务器。 在微服务架构下，Nginx主要用于静态代理和负载均衡。 Nginx优点：  高并发，高性能 扩展性好 异步非阻塞的事件驱动模型 高可靠性  微服务">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-07T11:40:24.000Z">
+<meta property="article:modified_time" content="2022-09-03T10:29:46.000Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="JavaEE">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1662276061228">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1662276061228">
+    <link rel="stylesheet" href="/css/style.css?v=1662276061228">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>39</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">38</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/JavaEE/" style="font-size: 15px;">JavaEE</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">微服务</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">39</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/07/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-07-04-2022-07-20%EF%BC%89/">学习总结（2022.07.04-2022.07.20）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/04/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-06-15-2022-06-24%EF%BC%89/">学习总结（2022.06.15-2022.06.24）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-27-2022-06-05%EF%BC%89/">学习总结（2022.05.27-2022.06.07）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/26/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-24-2022-05-26%EF%BC%89/">学习总结（2022.05.24-2022.05.26）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/23/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-05-17-2022-05-23%EF%BC%89/">学习总结（2022.05.17-2022.05.23）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="学习总结（2022.07.04-2022.07.20）" loading="lazy">
+              <h1>学习总结（2022.07.04-2022.07.20）</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年07月07日</a>
+</div>
+
+      <h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>Nginx是一个高性能的支持HTTP协议和反向代理的web服务器，其特点是占有内存少，并发能力强。</p>
+<p>正向代理：代理服务器代理的是用户的客户端，访问的是服务端的服务器。</p>
+<p>反向代理：代理服务器代理的是服务端的服务器，客户端访问的是被代理的服务器。</p>
+<p>在微服务架构下，Nginx主要用于静态代理和负载均衡。</p>
+<p>Nginx优点：</p>
+<ol>
+<li>高并发，高性能</li>
+<li>扩展性好</li>
+<li>异步非阻塞的事件驱动模型</li>
+<li>高可靠性</li>
+</ol>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p>单体架构的好处有：</p>
+<ol>
+<li>应用开发简单</li>
+<li>应用修改简单</li>
+<li>测试相对简单</li>
+<li>部署简单</li>
+<li>横向扩容性好</li>
+</ol>
+<p>弊端有：</p>
+<ol>
+<li>代码过度复杂且严重耦合，导致难以维护</li>
+<li>从代码提交到实际部署的周期很长</li>
+<li>扩展性受限</li>
+<li>开发慢，启动慢，严重影响开发效率</li>
+<li>难以交付可靠的单体应用</li>
+</ol>
+<p>为了解决单体架构的问题，提出了微服务架构，即每个服务器按照单一职责原则实现特定的一组功能，每个服务器可以独立部署，独立运行，独立对外提供服务。当一个单体应用程序的规模过大时，就很难作为一个整体开发，也很难让一个人完全理解，所以需要拆分为模块来开发。但是在单体应用中，模块通常由编程语言提供的结构来定义，这样不同模块的代码还是可以互相引用，导致模块中依赖关系的混乱。而在微服务架构中，要访问别的模块，只能通过实现该模块的服务所提供的API调用，这样就保持了模块的独立性。</p>
+<p>微服务的优势有：</p>
+<ol>
+<li>每个服务都相对较小，易维护</li>
+<li>大型的应用程序可以实现快速的持续交付和持续部署</li>
+<li>应用扩展灵活</li>
+<li>更好的容错</li>
+</ol>
+<p>弊端有：</p>
+<ol>
+<li>系统复杂难以管理</li>
+<li>部署追踪问题难</li>
+<li>事务难处理</li>
+<li>服务数量增加，管理复杂性增加</li>
+</ol>
+<h2 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h2><p>服务注册中心用于统一管理服务的状态和信息，以方便在微服务架构中服务间的互相调用。</p>
+<p>在服务启动时，会将自己的信息注册至服务注册中心，包括ip地址、端口号等；在服务运行的过程中，会实时向服务注册中心报告自己的状态，如果服务注册中心太久没有收到来自服务的消息，会自动将该服务注销，以免影响整个应用程序，这被称为心跳机制；服务启动后，会定时去注册中心拉取其他服务信息，即将服务注册表下载到本地，这样每个服务都知道其他服务的信息。</p>
+<p>目前使用的注册中心有Eureka和Nacos。</p>
+<h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>Eureka是SpringCloud中包含的注册中心的组件，采用了CS架构的设计，Server作为服务器端实现了服务注册中心的功能，Client则是作为客户端，服务提供者通过它实现服务的注册，服务消费者通过它完成服务的自动发现。</p>
+<p>EurekaServer的配置例子如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">7001</span><br><span class="hljs-comment"># Eureka配置</span><br><span class="hljs-attr">eureka:</span><br>  <span class="hljs-attr">instance:</span><br>    <span class="hljs-comment"># Eureka服务端的实例名字</span><br>    <span class="hljs-attr">hostname:</span> <span class="hljs-string">localhost</span><br>  <span class="hljs-attr">client:</span><br>    <span class="hljs-comment"># 表示是否向 Eureka 注册中心注册自己(这个模块本身是服务器,所以不需要)</span><br>    <span class="hljs-attr">register-with-eureka:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-comment"># fetch-registry如果为false,则表示自己为注册中心,客户端的化为 ture</span><br>    <span class="hljs-attr">fetch-registry:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">service-url:</span><br>      <span class="hljs-attr">defaultZone:</span> <span class="hljs-string">http://localhost:7001/eureka/</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-comment">// 启动类上添加注解@EnableEurekaServer</span><br><span class="hljs-meta">@EnableEurekaServer</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EurekaServer</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(EurekaServer1.class, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>EurekaClient的配置例子如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">registry-consumer</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8002</span><br><br><span class="hljs-comment"># Eureka配置</span><br><span class="hljs-attr">eureka:</span><br>  <span class="hljs-attr">client:</span><br>    <span class="hljs-attr">service-url:</span><br>      <span class="hljs-attr">defaultZone:</span> <span class="hljs-string">http://localhost:7001/eureka/</span><br>  <span class="hljs-attr">instance:</span><br>    <span class="hljs-attr">instance-id:</span> <span class="hljs-string">springcloud-consumer-eureka-8002</span> <span class="hljs-comment">#修改Eureka上的默认描述信息</span><br>    <span class="hljs-attr">hostname:</span> <span class="hljs-string">localhost</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-comment">// 启动类上添加注解@EnableEurekaClient</span><br><span class="hljs-meta">@EnableEurekaClient</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RegistryConsumerApplication</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(RegistryConsumerApplication.class, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Eureka具有自我保护机制，如果在短时间内丢失大量服务连接，Eureka并不会将所有丢失连接的服务注销，而是会保护这些服务。自我保护机制的意义是避免发生网络连接故障时对服务状态的误判，这会使服务集群更加健壮。</p>
+<h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><p>Nacos在功能方面与Eureka并无区别，只是Nacos在实现方式上不同相同。它是一个类似tomcat的独立服务器，需要自行开启才可使用。开启方式实在其bin目录下输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">startup.cmd -m standalone<br></code></pre></td></tr></table></figure>
+
+<p>即可启动。默认端口号为8848。</p>
+<p>在需要注册的服务中添加如下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8002</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">nacos-provider</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-attr">discovery:</span><br>       <span class="hljs-comment"># nacos服务器地址</span><br>        <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span> <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-comment">// 在启动类上加注解@EnableDiscoveryClient</span><br><span class="hljs-meta">@EnableDiscoveryClient</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NacosProvider8002Application</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(NacosProvider8002Application.class, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Ribbon负载均衡"><a href="#Ribbon负载均衡" class="headerlink" title="Ribbon负载均衡"></a>Ribbon负载均衡</h2><p>微服务架构中有一个很重要的问题是服务调用的选择策略问题，解决该问题的方法则是使用Ribbon。Ribbon是一个客户端负载均衡器，可以帮助我们在一个服务集群中，根据一组选择策略，选择一个服务实例，并向该实例发起调用请求。</p>
+<p>它支持的负载均衡策略如下。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>实现类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>随机策略</td>
+<td>RandomRule</td>
+<td>随机选择server</td>
+</tr>
+<tr>
+<td>轮训策略</td>
+<td>RoundRobinRule</td>
+<td>轮询选择</td>
+</tr>
+<tr>
+<td>重试策略</td>
+<td>RetryRule</td>
+<td>对选定的负载均衡策略(轮训)之上重试机制，在一个配置时间段内当选择服务不成功，则一直尝试使用该策略选择一个可用的服务；</td>
+</tr>
+<tr>
+<td>最低并发策略</td>
+<td>BestAvailableRule</td>
+<td>逐个考察服务，如果服务断路器打开，则忽略，再选择其中并发连接最低的服务</td>
+</tr>
+<tr>
+<td>可用过滤策略</td>
+<td>AvailabilityFilteringRule</td>
+<td>过滤掉因一直失败并被标记为circuit tripped的服务，过滤掉那些高并发链接的服务（active connections超过配置的阈值)</td>
+</tr>
+<tr>
+<td>响应时间加权重策略</td>
+<td>WeightedResponseTimeRule</td>
+<td>根据server的响应时间分配权重，响应时间越长，权重越低，被选择到的概率也就越低。响应时间越短，权重越高，被选中的概率越高，这个策略很贴切，综合了各种因素，比如：网络，磁盘，io等，都直接影响响应时间</td>
+</tr>
+<tr>
+<td>区域权重策略</td>
+<td>ZoneAvoidanceRule</td>
+<td>综合判断服务所在区域的性能，和服务的，轮询选择server并且判断一个AWS Zone的运行性能是否可用，剔除不可用的Zone中的所有server</td>
+</tr>
+</tbody></table>
+<p>可以通过配置文件指定负载均衡策略。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 这里的users是我们的服务名称</span><br><span class="hljs-attr">users:</span><br>  <span class="hljs-attr">ribbon:</span><br>   <span class="hljs-comment"># 这一行配置的就是实现具体负载均衡策略实现类的全类名</span><br>    <span class="hljs-attr">NFLoadBalancerRuleClassName:</span>    <span class="hljs-string">com.netflix.loadbalancer.RandomRule</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="OpenFeign"><a href="#OpenFeign" class="headerlink" title="OpenFeign"></a>OpenFeign</h2><p>在引入OpenFeign之前，我们调用服务的方式都是由RestTemplate实现的，但是需要自己构建url、请求参数等，这导致我们的代码和RESTful风格的Http请求紧密耦合。OpenFeign则可以实现它们的解耦，帮助我们以统一的方式，将接口翻译为RESTful风格的请求。</p>
+<p>因为OpenFeign是面向Java接口而非HTTP的API，所以需要我们自己建立一个工程用于存放一些公共接口的请求参数和响应类。</p>
+<p>使用OpenFeign需要定义Feign客户端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 注意，这里FeignClient的名字是调用的服务的名称</span><br><span class="hljs-meta">@FeignClient(&quot;feign-provider-8005&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">DemoServiceClient</span>&#123;<br>    <span class="hljs-meta">@GetMapping(&quot;/feign/hello&quot;)</span><br>    String <span class="hljs-title function_">sayHello</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(name = &quot;name&quot;)</span>String name)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-meta">@EnableDiscoveryClient</span><br><span class="hljs-comment">// 在启动类上加注解@EnableFeignClients</span><br><span class="hljs-meta">@EnableFeignClients</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FeignConsumerApplication</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(FeignConsumerApplication.class, args);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>如果需要查看日志，可以在FeignClient的配置文件中打开日志配置。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 这里的xxx表示我们自己的定义的FeignClient所在包的包名(比如: com.cskaoyan.feign.consumer.api)</span><br><span class="hljs-attr">logging:</span><br>  <span class="hljs-attr">level:</span><br>    <span class="hljs-attr">xxx:</span> <span class="hljs-string">debug</span><br></code></pre></td></tr></table></figure>
+
+<p>为了防止在非正常情况下服务在调用过程中长时间阻塞等待，可以在配置文件中设置超时时间。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">ribbon:</span><br>  <span class="hljs-comment">#指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间</span><br>  <span class="hljs-attr">ReadTimeout:</span> <span class="hljs-number">5000</span><br>  <span class="hljs-comment">#指的是建立连接后从服务器读取到可用资源所用的时间</span><br>  <span class="hljs-attr">ConnectTimeout:</span> <span class="hljs-number">5000</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h2><p>若每个服务都拥有自己的配置，那么如果有一天一些公共的配置出现了更改的话，所有服务都需要一起更改，且每个服务都需要重启，这明显是不合理的。要解决这个问题，就需要引入配置中心。配置中心类似于注册中心，可以以中心化、外部化和动态化的方式管理所有环境的应用配置和服务配置，消除了配置变更时重新部署应用和服务的需求，让配置管理变得更加高效。</p>
+<p>目前Nacos除了作为服务注册中心，还具有配置中心的功能。Nacos配置中心定义了如下概念。</p>
+<ul>
+<li>配置项：一个具体的可配置的参数与其值域，通常以 param-key&#x3D;param-value 的形式存在。例如我们常配置系统的日志输出级别（logLevel&#x3D;INFO|WARN|ERROR） 就是一个配置项。</li>
+</ul>
+<ul>
+<li>配置集：一组相关或者不相关的配置项的集合称为配置集。在系统中，一个配置文件通常就是一个配置集，包含了系统各个方面的配置，每一个配置集都对应一个唯一的DataId，DataId必须由我们自己定义。</li>
+<li>配置分组:  Nacos 中的一组配置集，是组织配置的维度之一，每一个分组都有一个唯一的组名，如果我们未定义，则默认使用DEFAULT-GROUP分组</li>
+<li>命名空间:  用于进行用户粒度的配置隔离，每一个命名空间都有一个唯一的Id值，如果我们未定义，则默认使用public命名空间</li>
+</ul>
+<p>有以上的概念，即可自己定义配置项了。</p>
+<ul>
+<li><p>配置项的key值以及分组组名都由自己定义。</p>
+</li>
+<li><p>命名空间的id值由Nacos生成。</p>
+</li>
+<li><p>配置集的DataId定义如下。</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span>&#123;prefix&#125;-<span class="hljs-symbol">$</span>&#123;spring.profiles.active&#125;.<span class="hljs-symbol">$</span>&#123;<span class="hljs-keyword">file</span>-extension&#125;<br></code></pre></td></tr></table></figure>
+
+<p>prefix默认为spring配置文件中spring.application.name的值；spring.profiles.active对应spring配置文件中名字相同的值；&#96;file-exetension为配置内容的数据格式，可以通过spring.cloud.nacos.config.file-extension配置，只支持properties和yaml。</p>
+</li>
+</ul>
+<p>在spring项目中加入配置中心的配置，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 项目中的其他配置都包含在application.yml文件中</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">3377</span><br><span class="hljs-comment"># bootstrap.yml文件内容</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">nacos-config-client</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span> <span class="hljs-comment"># 表示开发环境</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-attr">config:</span><br>        <span class="hljs-comment">#Nacos作为配置中心地址</span><br>        <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span> <br>        <span class="hljs-comment">#指定yaml格式的配置，如果是yml文件，注意这里写的是yaml!</span><br>        <span class="hljs-attr">file-extension:</span> <span class="hljs-string">yaml</span> <br>        <span class="hljs-comment"># 配置所属的配置分组</span><br>        <span class="hljs-comment"># group: DEV_GROUP</span><br>        <span class="hljs-comment"># 配置所属的命名空间</span><br>        <span class="hljs-comment"># namespace: 7d8f0f5a-6a53-4785-9686-dd460158e5d4    </span><br></code></pre></td></tr></table></figure>
+
+<p>此外Nacos的配置也可以通过数据库实现持久化，Nacos的配置会保存到Nacos自带的一个数据库derby中，因此即使重启Nacos也可以看到之前的配置信息。由于derby是嵌入式数据库，其中的数据无法可视化，所以Nacos也支持将数据库更换为mysql，具体方式如下。</p>
+<ul>
+<li><p>在数据库中，创建名为nacos的数据库</p>
+</li>
+<li><p>在nacos数据库中，执行数据库初始化文件：nacos-mysql.sql(改文件在conf目录下已经提供)</p>
+</li>
+<li><p>.修改conf&#x2F;application.properties文件，增加支持mysql数据源配置（目前只支持mysql），添加mysql数据源的url、用户名和密码。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">spring.datasource.platform=mysql</span><br><span class="hljs-string">db.num=1</span><br><span class="hljs-comment"># 这里的url要改成你自己的mysql数据库地址，并在你的mysql中创建名为nacos的数据库</span><br><span class="hljs-string">db.url.0=jdbc:mysql://11.162.196.16:3306/nacos?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true</span><br><span class="hljs-comment"># 这里要改成你自己登录mysql的用户名和密码</span><br><span class="hljs-string">db.user.0=nacos_devtest</span><br><span class="hljs-string">db.password.0=youdontknow</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="TK-Mybatis"><a href="#TK-Mybatis" class="headerlink" title="TK-Mybatis"></a>TK-Mybatis</h2><p>TK-Mybatis是Mybatis的增强工具，为简化开发，提高效率而生。</p>
+<p>TK-Mybatis的示例如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 实体类和表的映射</span><br><span class="hljs-meta">@Table(name = &quot;user&quot;)</span> <span class="hljs-comment">// name配置为表名</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123; <br>	<span class="hljs-meta">@Id</span> <span class="hljs-keyword">private</span> Integer id; <span class="hljs-comment">// @Id 表示该字段是主键 </span><br>	<span class="hljs-meta">@Column</span> <span class="hljs-keyword">private</span> String name; <span class="hljs-comment">// @Column表示该字段是普通字段 </span><br>	<span class="hljs-meta">@Column</span> <span class="hljs-keyword">private</span> Integer age; <br>	<span class="hljs-meta">@Column</span> <span class="hljs-keyword">private</span> String gender; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 通用Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserMapper</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Mapper</span>&lt;User&gt; &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@MapperScan(basePackages = &quot;com.cskaoyan.tkdemo.dal&quot;)</span> <span class="hljs-comment">//这个注解加到启动类上或者是 配置类上 </span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TkDemoApplication</span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span> <br><span class="hljs-keyword">private</span> UserMapper userMapper;<br><br><span class="hljs-meta">@Test</span> <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test01</span><span class="hljs-params">()</span>&#123; <br>    	<span class="hljs-comment">// 这个就是tkMybatis给我们提供的模板方法，类似的方法还有很多 </span><br>    <br>    	<span class="hljs-comment">// 插入数据之后获取id值</span><br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>        user.setUserName(<span class="hljs-string">&quot;zuoyou&quot;</span>);<br>        user.setAge(<span class="hljs-number">20</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">insert</span> <span class="hljs-operator">=</span> userMapper.insert(user);<br>        System.out.println(user.getId());<br>    <br>    	<span class="hljs-comment">// 根据复杂条件查询</span><br>        <span class="hljs-type">Example</span> <span class="hljs-variable">secondExample</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Example</span>(User.class);<br>        secondExample.createCriteria()<br>                <span class="hljs-comment">// 这里的条件名称，指的是映射实体类的属性名</span><br>                .orEqualTo(<span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;zs&quot;</span>)<br>                .orEqualTo(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">20</span>);<br><br>        List&lt;User&gt; us = userMapper.selectByExample(secondExample);<br>    <br>    	<span class="hljs-comment">// 根据复杂条件来修改</span><br>        <span class="hljs-type">Example</span> <span class="hljs-variable">example</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Example</span>(User.class);<br>        example.createCriteria().andEqualTo(<span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;lisi&quot;</span>);<br><br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>        user.setAge(<span class="hljs-number">100</span>);<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> userMapper.updateByExampleSelective(user, example);<br>    <br>    	<span class="hljs-comment">// 删除</span><br>    	<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> userMapper.deleteByPrimaryKey(<span class="hljs-number">4</span>);<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Map-Struct"><a href="#Map-Struct" class="headerlink" title="Map-Struct"></a>Map-Struct</h2><p>Map-Struct主要用途是简化对象间的映射。在实际开发中，DAO层的实体类（即PO）与数据传输类（即BO或VO）不一定完全相同，而通过Map-Struct可以使它们间的转换变得简单。</p>
+<p>使用示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Mapper(componentModel = &quot;spring&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserConverter</span> &#123;<br>    <span class="hljs-comment">// User对象 ——&gt; UserDto</span><br>    <span class="hljs-meta">@Mappings(&#123;</span><br><span class="hljs-meta">            @Mapping(source = &quot;userName&quot;, target = &quot;name&quot;)</span><br><span class="hljs-meta">    &#125;)</span><br>    UserDto <span class="hljs-title function_">userDoToUserDto</span><span class="hljs-params">(User user)</span>;<br><br>    <span class="hljs-comment">// List&lt;User&gt; ——&gt; List&lt;UserDto&gt;</span><br>    List&lt;UserDto&gt; <span class="hljs-title function_">userDosToUserDtos</span><span class="hljs-params">(List&lt;User&gt; users)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h2><p>SPI是JDK内置的一种服务提供发现机制，用于做接口实现类的扩展发现，简单来说，它就是一种动态替换发现的机制。</p>
+<p>SPI要实现其机制，需要遵循以下约定。</p>
+<ul>
+<li>当服务的提供者提供了服务接口的一种实现之后，在jar包的META-INF&#x2F;services&#x2F;目录中同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当程序运行时，使用这个接口的实现类的时，就能通过该jar包META-INF&#x2F;Services&#x2F;的配置文件找到具体的实现类名。并加载该实现类(可能有多个)并实例化。</li>
+</ul>
+<p>基于这样的一个约定就能很好的找到服务接口的实现类，而不需要在代码里指定。</p>
+<p>示例</p>
+<p>定义接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">CatService</span> &#123; <br>    	<span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span>; <br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>定义接口实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BlackCatService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">CatService</span> &#123;<br>  	<span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span> &#123; <br>  		System.out.println(<span class="hljs-string">&quot;黑猫呼呼睡大觉...&quot;</span>); <br>  	&#125; <br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WhiteCatService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">CatService</span> &#123; <br>  <span class="hljs-meta">@Override</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span> &#123; <br>		System.out.println(<span class="hljs-string">&quot;白猫孜孜不倦的学习...&quot;</span>); <br>  	&#125; <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>定义配置文件</p>
+<p>在src&#x2F;META-INF&#x2F;services目录下新增和接口全类名一样的一个文件，文件里面配置需要接口动态 加载的实现类的全类名，这样Java在调用接口的时候就能动态的去找到接口的实现，而对原来的代 码没有丝毫的侵入性。</p>
+<h2 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h2><p>网关是一个服务器，是系统的唯一入口。所有的客户端和消费端都通过统一的网关接入微服务，在网关处理所有的非业务功能，如请求认证，请求记录，请求限流，黑白名单判断等。</p>
+<p>Spring Cloud Gateway是一个基于Spring生态的API网关，基于WebFlux框架实现。它旨在以简单高效的方式实现，请求路由，以及一些其他的边缘功能，比如，安全，监控等功能。</p>
+<p>通用的网关框架除了Gateway之外，还有Zuul，Zuul2等框架。其中，Zuul是由Netflix公司开发出的最早的通用网关框架，功能丰富，但是基于同步阻塞式Servlet API实现，性能不佳。Zuul2可以理解为Zuul的升级版，它基于异步非阻塞模式实现，但是由于zuul2在开发过程中一直延期，所以Spring Coud官方并未采用Zuul2最为自己的通用网关，而是自己推出了自己的基于异步非阻塞实现的第二代服务网关Gateway。</p>
+<p>Gateway的一些核心概念如下。</p>
+<ul>
+<li>Predicate：路由规则的匹配条件。</li>
+<li>Filter：过滤器，在请求处理前实现对请求的拦截处理，在请求处理之后实现对响应的拦截处理。</li>
+<li>Route：定义请求和路由目标之间的映射，它由一个唯一ID(自定义)，一个目标地址URI，表示路由条件Predicate集合，以及一个Filter集合组成。对于一个请求而言，如果它满足一个路由的全部路由条件(Predicate)，那么该请求就会按照该路由(Route)规则，向目标地址URI转发。</li>
+</ul>
+<p>Gateway的工作流程如下。</p>
+<ul>
+<li>客户端向Gateway发起请求</li>
+<li>Gateway的Handler Mapping组件，会对请求做路由匹配，如果请求和某个路由规则匹配，则把该请求交给Web Handler处理</li>
+<li>在将请求转发给目标之前，Web Handler会将请求，交给满足请求过滤条件的一系列过滤器，即一个过滤器链对该请求进行过滤处理</li>
+<li>过滤器既在转发请求前拦截请求，也在请求处理之后对响应进行拦截处理。</li>
+</ul>
+<p>Gateway可以通过整合Nacos或Eureka、Ribbon从而实现动态路由（即服务的自动发现和调用、服务的负载均衡）</p>
+<p>配置文件示例如下。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">cloud-gateway</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-attr">discovery:</span><br>        <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span><br>    <span class="hljs-attr">gateway:</span><br>      <span class="hljs-attr">routes:</span><br>         <span class="hljs-comment">#路由的ID，没有固定规则但要求唯一，建议配合服务名</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-attr">id:</span> <span class="hljs-string">config_route</span> <br>          <span class="hljs-comment">#匹配后提供服务的路由地址, 这里lb之后，跟的是要调用的服务名称</span><br>          <span class="hljs-attr">uri:</span> <span class="hljs-string">lb://nacos-provider-8002</span><br>           <span class="hljs-comment"># 断言，路径相匹配的条件</span><br>          <span class="hljs-attr">predicates:</span><br>            <span class="hljs-bullet">-</span> <span class="hljs-string">Path=/routeconfig/rest/**</span>      <br></code></pre></td></tr></table></figure>
+
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>JWT是一个开发标准，它定义了一种紧凑的，自包含的方式，用于JSON对象在各方之间安全的传输信息，该信息可以被验证和信任，因为它是数字签名的。</p>
+<p>下列场景中使用JWT是很有用的：</p>
+<ul>
+<li>Information Exchange（信息交换）：对于安全的在各方之间传输信息而言，Json·Web·Token无疑是一种很好的方式。因为JWT可以被签名，例如，用公钥&#x2F;私钥配对，你可以确定发送人就是他们所说的那个人。另外，由于签名是使用头和有效负载计算的，您还可以验证内容有没有被篡改。</li>
+<li>正因为数据可以基于JWT进行安全的传输，所以基于JWT，我们可以实现单点登录功能。（单点登录，即在多应用系统中，用户只需登录一次就能访问所有相互信任的应用系统）</li>
+</ul>
+<p>使用JWT可以完成基于Token的身份验证，流程如下：</p>
+<ol>
+<li>客户端使用用户名、密码请求登录</li>
+<li>服务器收到请求去验证用户名和密码</li>
+<li>验证成功之后服务端会签发一个token，再把这个token发送给客户端</li>
+<li>客户端收到token以后可以把它存储起来，存到客户端内存或者其他地方</li>
+<li>客户端每次向服务器请求资源的时候需要带着服务器签发的token</li>
+<li>服务端收到请求，然后去验证客户端请求里面带着的token，如果验证成功，就向客户端返回请求的数据</li>
+</ol>
+<p>对比使用Session的身份验证：</p>
+<ol>
+<li>每次用户认证通过以后，服务器需要创建一条记录来保存用户信息，通常是在内存中。那么随着认证通过的用户越来越多，服务器在这里的开销就会越来越大。</li>
+<li>由于session是在内存中的，这就带来一些扩展性的问题。</li>
+<li>用户很容易受到CSRF（跨站请求伪造）的攻击</li>
+</ol>
+<p>使用Token的身份验证：</p>
+<ol>
+<li>JWT是把用户信息保存在客户端，基于token的方式将用户状态分散到了各个客户端中，可以减轻服务端的内存压力。</li>
+<li>token的状态是存储在客户端，这就使得服务器端并未存储用户登录状态，是无状态的，因为是无状态的，所以便于集群的扩容。</li>
+<li>Token不是cookie。每次请求的时候token都会被发送，可以作为请求参数发送，可以放在请求头里面发送，也可以放在cookie里面被发送。即使在你的实现中将token存储到客户端的cookie中，这个cookie也只是一种存储机制，而非身份认证机制。没有基于会话的信息可以操作，因为我们没有会话。</li>
+</ol>
+<p>JWT由三部分组成，中间以<code>·</code>连接，三部分分别是：</p>
+<ul>
+<li>Header</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+<p>Header由两部分信息组成：</p>
+<ul>
+<li>type：声明类型</li>
+<li>alg：声明加密的算法，通常使用HMAC SHA256</li>
+</ul>
+<p>Payload由8部分信息组成：</p>
+<ul>
+<li>iss：签发者</li>
+<li>sub：所面向的用户</li>
+<li>aud：接收方</li>
+<li>exp：过期时间</li>
+<li>nbf：可用时间，在该时间前JWT不可用</li>
+<li>iat：签发时间</li>
+<li>jti：唯一身份标识，主要用于作为一次性token</li>
+<li>claim：存放信息的地方</li>
+</ul>
+<p>Signature即签名信息。</p>
+<p>在java中，JWT的使用方式如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建JWT</span><br><span class="hljs-type">String</span> <span class="hljs-variable">token</span> <span class="hljs-operator">=</span> JwtTokenUtils.builder().msg(<span class="hljs-string">&quot;xxx&quot;</span>).build().creatJwtToken();<br><br><span class="hljs-comment">// 解析JWT</span><br><span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> JwtTokenUtils.builder().token(token).build().freeJwt();<br></code></pre></td></tr></table></figure>
+
+<h2 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h2><p>消息中间件（消息队列）：利用高效可靠的消息传递机制进行平台无关的数据交流，并基于数据通信来进行分布式系统的集成。</p>
+<p>RocketMQ是阿里巴巴开源的一个消息中间件，是一个队列模型的消息中间件，具有高性能、高可靠、高实时、分布式特点。目前已贡献给apache。</p>
+<p>对比一些其他的消息中间件：</p>
+<ul>
+<li>ActiveMQ：Apache出品，最流行的，能力强劲的开源消息总线。ActiveMQ 是一个完全支持JMS1.1和J2EE 1.4规范的 JMS Provider实现，是使用Java语言编写的。由于年代久远且社区不活跃，目前已极少人使用。</li>
+<li>RabbitMQ：AMQP协议的领导实现，支持多种场景。淘宝的MySQL集群内部有使用它进行通讯，OpenStack开源云平台的通信组件，最先在金融行业得到运用，使用Erlang语言编写的。</li>
+<li>Kafka：最初由Linkedin公司开发，是一个分布式、支持分区的（partition）、多副本的（replica），基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm&#x2F;Spark流式处理引擎，web&#x2F;nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源 项目。</li>
+</ul>
+<p>RocketMQ的主要功能有以下两种：</p>
+<ul>
+<li>异步化。将一些可以异步化的操作通过发送消息来进行异步化，从而提高效率。</li>
+<li>限流削峰。在高并发场景下把请求存入消息队列，利用排队思想降低系统瞬间峰值。</li>
+</ul>
+<p>RocketMQ的一些相关概念如下。</p>
+<ul>
+<li><p>Producer：消息生产者，负责消息的产生。</p>
+</li>
+<li><p>Consumer：消息消费者，负责消息消费。</p>
+</li>
+<li><p>Topic：消息的逻辑管理单位，每个消息都具有的一个属性。</p>
+</li>
+<li><p>Broker：消息的中转角色，负责存储消息，转发消息，一般也称为server，可以理解为一个存放消息的服务，里面可以有多个Topic。</p>
+</li>
+<li><p>MessageQueue: 消息的物理管理单位，一个Topic下有多个Queue，默认一个Topic创建时会创建四个MessageQueue。</p>
+</li>
+<li><p>ConsumerGroup: 具有同样消费逻辑消费同样消息的Consumer，可以归并为一个group。</p>
+</li>
+<li><p>ProducerGroup: 具有同样属性的一些Producer可以归并为同一个Group。</p>
+<p>同样属性是指：发送同样Topic类型的消息</p>
+</li>
+<li><p>Nameserver 注册中心。</p>
+<p>作用：</p>
+<ul>
+<li>每个Broker启动的时候会向namesrv注册</li>
+<li>Producer发送消息的时候根据Topic获取路由到Broker里面Broker的信息</li>
+<li>Consumer根据Topic到Namesrv 获取topic的路由到Broker的信息</li>
+</ul>
+</li>
+</ul>
+<p>RocketMQ部署步骤如下：</p>
+<ol>
+<li>注册中心Nameserver启动</li>
+<li>消息中转服务Broker启动。启动时会创建Topic及其对应的MessageQueue，然后去注册中心注册，把自己的地址以及负责的Topic告诉注册中心。Broker和Nameserver之间通过心跳机制来检测对方是否存活。(Broker每隔30秒向所有Nameserver发送心跳，Nameserver则每隔10秒钟扫描所有存活的Broker，若2分钟内未收到心跳，则断开连接)</li>
+<li>消息生产者Producer启动。启动后与一个Nameserver和所有与该生产者关联的Broker保持长连接。每30秒从Nameserver获取所有topic的情况，发送消息时，根据Nameserver、Topic和Broker建立连接。每30秒向所有Broker发送心跳。</li>
+<li>消息消费者Consumer启动。启动后操作与Producer相同。</li>
+</ol>
+<p>同步刷盘和异步刷盘</p>
+<p>RocketMQ的消息可以存储到磁盘，保证断电后可以恢复，且存储的消息量不会超出内存限制。为了提高性能，RocketMQ会尽可能保证磁盘的顺序写，此时写入磁盘会有两种方式：</p>
+<ol>
+<li>异步刷盘，返回</li>
+</ol>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2022/07/07/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-07-04-2022-07-20%EF%BC%89/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;07&#x2F;07&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-07-04-2022-07-20%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2022&#x2F;07&#x2F;07&#x2F;%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%882022-07-04-2022-07-20%EF%BC%89&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/JavaEE/" rel="tag">JavaEE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">微服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">服务注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eureka"><span class="toc-number">3.1.</span> <span class="toc-text">Eureka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nacos"><span class="toc-number">3.2.</span> <span class="toc-text">Nacos</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">4.</span> <span class="toc-text">Ribbon负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenFeign"><span class="toc-number">5.</span> <span class="toc-text">OpenFeign</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="toc-number">6.</span> <span class="toc-text">配置中心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TK-Mybatis"><span class="toc-number">7.</span> <span class="toc-text">TK-Mybatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map-Struct"><span class="toc-number">8.</span> <span class="toc-text">Map-Struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPI%E6%9C%BA%E5%88%B6"><span class="toc-number">9.</span> <span class="toc-text">SPI机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gateway"><span class="toc-number">10.</span> <span class="toc-text">Gateway</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">11.</span> <span class="toc-text">JWT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RocketMQ"><span class="toc-number">12.</span> <span class="toc-text">RocketMQ</span></a></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1662276061254"></script>
+
+
+	<script async src="/js/search.js?v=1662276061254"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>
