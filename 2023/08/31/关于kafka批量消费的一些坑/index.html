@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>关于Kafka批量消费的一些坑 - Ykuri的小角落</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" type="image/x-icon" />
+    <meta name="description" content="​	很久很久之前，发现Kafka的一些Topic发生了消费延迟，为了提高消费速率，我自作聪明地使用containerFactory并指定了一个批量消费的Factory： 12345678910111213@Bean(value &#x3D; &quot;kafkaListenerContainerBatchFactory&quot;)public KafkaListenerContainerFactory&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Kafka批量消费的一些坑">
+<meta property="og:url" content="https://ykuri98.github.io/2023/08/31/%E5%85%B3%E4%BA%8Ekafka%E6%89%B9%E9%87%8F%E6%B6%88%E8%B4%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/index.html">
+<meta property="og:site_name" content="Ykuri的小角落">
+<meta property="og:description" content="​	很久很久之前，发现Kafka的一些Topic发生了消费延迟，为了提高消费速率，我自作聪明地使用containerFactory并指定了一个批量消费的Factory： 12345678910111213@Bean(value &#x3D; &quot;kafkaListenerContainerBatchFactory&quot;)public KafkaListenerContainerFactory&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-31T01:20:58.000Z">
+<meta property="article:modified_time" content="2023-09-01T02:06:23.330Z">
+<meta property="article:author" content="Ykuri98">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="Kafka">
+<meta name="twitter:card" content="summary">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"
+    />
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1693554741012">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1693554741012">
+    <link rel="stylesheet" href="/css/style.css?v=1693554741012">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Ykuri98" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Ykuri98">
+            <img src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/avatar.png" alt="Ykuri98" alt="Ykuri98">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>46</div>
+        <div><span>标签</span>14</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/Ykuri98/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/技术/">技术</a>
+          <span class="category-list-count">45</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/JavaEE/" style="font-size: 15px;">JavaEE</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Nacos/" style="font-size: 10px;">Nacos</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">微服务</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+    
+  </div>
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">39</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/01/%E8%AE%B0%E4%B8%80%E6%AC%A1Oracle-SQL%E8%B0%83%E4%BC%98/">记一次Oracle SQL调优</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/01/%E8%AE%B0%E4%B8%80%E6%AC%A1Nacos%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E4%B8%8E%E6%9B%B4%E6%94%B9/">记一次Nacos配置迁移与更改</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/01/RabbitMQ%E6%B6%88%E8%B4%B9%E5%A4%9A%E4%B8%AA%E9%9B%86%E7%BE%A4%E7%9A%84%E6%B6%88%E6%81%AF/">RabbitMQ消费多个集群的消息</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/01/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">工作中的一些小问题（持续更新）</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/01/%E5%85%B3%E4%BA%8E%E7%BD%91%E5%85%B3%E8%B6%85%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">关于网关超时的一些思考与解决方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Ykuri98
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 56.25%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/Ykuri98/image_repository@latest/wallpaper.png" alt="关于Kafka批量消费的一些坑" loading="lazy">
+              <h1>关于Kafka批量消费的一些坑</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2023年08月31日</a>
+</div>
+
+      <p>​	很久很久之前，发现Kafka的一些Topic发生了消费延迟，为了提高消费速率，我自作聪明地使用<code>containerFactory</code>并指定了一个批量消费的Factory：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(value = &quot;kafkaListenerContainerBatchFactory&quot;)</span><br><span class="hljs-keyword">public</span> KafkaListenerContainerFactory&lt;ConcurrentMessageListenerContainer&lt;String, String&gt;&gt; <span class="hljs-title function_">kafkaListenerContainerFactory</span><span class="hljs-params">()</span> &#123;<br>    ConcurrentKafkaListenerContainerFactory&lt;String, String&gt; factory = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentKafkaListenerContainerFactory</span>&lt;&gt;();<br>    factory.setConsumerFactory(consumerFactory());<br>    <span class="hljs-comment">//消费者实例个数，并发消费（实例数*分布式机器数&lt;=kafka分区数，避免浪费）</span><br>    factory.setConcurrency(concurrency);<br>    <span class="hljs-comment">//支持并发消费</span><br>    factory.setBatchListener(<span class="hljs-literal">true</span>);<br>    <span class="hljs-comment">//设置提交偏移量的方式, 默认是 batch</span><br>    factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);<br>    <span class="hljs-keyword">return</span> factory;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​	曽以为这样就万事大吉，Kafka的消费延迟也确实消失了，直到昨天早上，生产报出问题，Kafka竟然出现了消息丢失的情况！用可视化工具检查了Kafka内的消息，确认并不是生产者的问题，那么消息丢失就是发生在消费者这了。</p>
+<p>​	检查日志，发现一个很奇怪的问题：Kafka消费的offset有时候会开始中断几百条再消费。确认了这个group只有我一个项目在消费，所以不存在项目间抢夺消息的问题。</p>
+<p>​	此时一个想法在我脑海浮现：难道是批量消费都没有执行完，就被强行中断了？因为这个group做了三个分区，并且开了三台机器来消费，所以每个机器的并发数都是1，也就是说，Kafka Consumer在每台机器上都是一个单线程。一开始怀疑的是<code>auto-offset-reset</code>这个配置项。在项目中，它的值是<code>latest</code>，官方文档的解释是</p>
+<blockquote>
+<p>earliest：自动将偏移量重置为最早的偏移量<br>latest：自动将偏移量重置为最新偏移量</p>
+</blockquote>
+<p>​	是不是在两次拉取中，因为前一次的消费速度太慢，导致前一次的offset并没有提交，后一次的消费则直接从最新的offset消费了？然而在本地的实验宣告该想法是不正确的，即使改为了<code>earliest</code>，依旧出现了offset跳跃的问题。那么只能确定，这个配置项只会在Kafka Consumer停止或重启时有影响。</p>
+<p>​	那么我加快消费速度，让他能在两次拉取的间隔时间内全部消费完呢？我在本地开启一个线程池去并发消费，结果很明显，offset跳跃的情况消失了。根据日志可以看到，两次批量拉取的间隔时间是在3s左右。</p>
+<p>​	为什么是3s？查了一圈发现最有可能的是<code>heartbeat.interval.ms</code>这个配置项在起作用。在Kafka中，除了消费者线程，还有一个心跳线程。生产者线程会定时发送心跳给心跳线程接收，如果心跳线程没有在一定时间内回应，生产者会默认该消费者已经挂了，将该消费者提出消费群组并进行重新的负载均衡（Rebalance）。但是如果只是消费速度慢，offset没有及时commit的话，就会出现以下情况：</p>
+<blockquote>
+<p>生产者发送心跳 -&gt; 消费者还在消费，offset未commit -&gt; Kafka Consumer报出<code>CommitFailedException</code>，commit失败 -&gt; 生产者未收到心跳回应，踢出该消费者并进行Rebalance -&gt; 消费者并未挂掉，会重新订阅topic -&gt; 消费者从最新的offset开始消费，发生offset跳跃</p>
+</blockquote>
+<p>​	以上是我结合实际情况和文档、博客作出的一个较合理的猜测，真实情况还是得在实际项目中去继续观察……</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Ykuri98<br>
+        <strong>本文链接：</strong><a href="https://ykuri98.github.io/2023/08/31/%E5%85%B3%E4%BA%8Ekafka%E6%89%B9%E9%87%8F%E6%B6%88%E8%B4%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" title="https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2023&#x2F;08&#x2F;31&#x2F;%E5%85%B3%E4%BA%8Ekafka%E6%89%B9%E9%87%8F%E6%B6%88%E8%B4%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ykuri98.github.io&#x2F;2023&#x2F;08&#x2F;31&#x2F;%E5%85%B3%E4%BA%8Ekafka%E6%89%B9%E9%87%8F%E6%B6%88%E8%B4%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Kafka/" rel="tag">Kafka</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/java/" rel="tag">java</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'ff024b5293a92e4461fd',
+        clientSecret: 'c749602a0b62efd70c6ec86e7c4f0f62a5a8904c',
+        id: window.location.pathname,
+        repo: 'issue_repository',
+        owner: 'Ykuri98',
+        admin: 'Ykuri98'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1693554741015"></script>
+
+
+	<script async src="/js/search.js?v=1693554741015"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+    <!-- baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?ed4931f4a887a0876dd7a237254a9600';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+
+</html>
